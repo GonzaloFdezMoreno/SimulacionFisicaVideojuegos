@@ -9,6 +9,7 @@
 #include "callbacks.hpp"
 
 #include <iostream>
+#include "Particle.h"
 
 
 
@@ -28,6 +29,8 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
+
+Particle* partic = NULL;
 
 
 // Initialize physics engine
@@ -53,6 +56,9 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+	//Añadir elementos
+	partic = new Particle({ 0,0,0 }, { 0,10,0 });
 	}
 
 
@@ -65,6 +71,9 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+	partic->integrate(t);
+
 }
 
 // Function to clean data

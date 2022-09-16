@@ -10,6 +10,9 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Particle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -21,10 +24,16 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
+    <ClInclude Include="Particle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
       <UniqueIdentifier>{d04b4f9f-5a69-465e-8070-25c6d0bcd3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{767c0a07-b51e-4b2c-a58b-c3a5d25cbda7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
