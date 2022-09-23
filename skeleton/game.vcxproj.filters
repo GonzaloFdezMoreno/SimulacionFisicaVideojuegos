@@ -13,6 +13,9 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Mshot.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -25,6 +28,9 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="Particle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Mshot.h">
       <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>

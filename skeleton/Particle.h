@@ -5,14 +5,16 @@
 
 class Particle {
 public:
-	Particle(Vector3 pos, Vector3 vel);
+	Particle(Vector3 pos, Vector3 vel,float dapming,Vector3 accel);
 	~Particle();
 
 	void integrate(double t); //es el update
 	 
 
-private:
+protected:
 	Vector3 veloc;
 	physx::PxTransform posit;
 	RenderItem* renderItemPart;
+	float damp;
+	Vector3 accel;
 };

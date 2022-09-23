@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include "Particle.h"
+#include "Mshot.h"
+
 
 
 
@@ -31,6 +33,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 Particle* partic = NULL;
+Mshot* bullet = NULL;
 
 
 // Initialize physics engine
@@ -58,7 +61,8 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	//Añadir elementos
-	partic = new Particle({ 0,0,0 }, { 0,10,0 });
+	//partic = new Particle({ 0,50,0 },{ -10,20,0 }, 0.9, {0,-9.8,0});
+	
 	}
 
 
@@ -72,8 +76,9 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	partic->integrate(t);
-
+	if(bullet!=NULL)
+	//partic->integrate(t);
+	bullet->integrate(t);
 }
 
 // Function to clean data
@@ -101,7 +106,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	//case 'B': break;
+	case 'B':
+		bullet = new Mshot(20, { camera.p.x,camera.p.y,camera.p.z }, { -10,20,0 }, 0.9, { 0,-9.8,0 });
+		
+		
+		break;
 	//case ' ':	break;
 	case ' ':
 	{
