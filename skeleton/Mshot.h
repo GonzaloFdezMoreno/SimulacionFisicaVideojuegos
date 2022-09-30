@@ -4,7 +4,7 @@
 #include "Particle.h"
 
 
-class Mshot {
+class Mshot:public Particle {
 
 public:
 	Mshot(double mass,Vector3 vel, Vector3 pos, float damping, Vector3 accelerate);
@@ -16,9 +16,5 @@ public:
 private:
 	
 	double mass;
-	Vector3 veloc;
-	physx::PxTransform posit;
-	RenderItem* renderItemPart;
-	float damp;
-	Vector3 accel;
+	
 };

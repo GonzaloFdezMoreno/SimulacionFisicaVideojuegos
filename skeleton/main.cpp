@@ -33,7 +33,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 Particle* partic = NULL;
-Mshot* bullet = NULL;
+std::vector<Mshot*> bullets ;
 
 
 // Initialize physics engine
@@ -76,9 +76,9 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	if(bullet!=NULL)
+	for(auto b:bullets)
 	//partic->integrate(t);
-	bullet->integrate(t);
+	b->integrate(t);
 }
 
 // Function to clean data
@@ -103,19 +103,46 @@ void cleanupPhysics(bool interactive)
 void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
+	
 
 	switch(toupper(key))
 	{
 	case 'B':
-		bullet = new Mshot(20, { camera.p.x,camera.p.y,camera.p.z }, { -10,20,0 }, 0.9, { 0,-9.8,0 });
-		
+		//pistola
+		bullets.push_back(new Mshot(2, { GetCamera()->getDir()*2500}, {GetCamera()->getEye()}, 0.99, {0,-0.5,0}));
 		
 		break;
-	//case ' ':	break;
-	case ' ':
+	case 'L': {
+		//laser
+		bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 10000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 }));
+		break; 
+	}
+	case 'C':
 	{
+		//canyon
+		bullets.push_back(new Mshot(100, { GetCamera()->getDir().x,GetCamera()->getDir().y *2000,GetCamera()->getDir().z *1000 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 }));
 		break;
 	}
+	case 'F':
+	{
+		//bfuego
+		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.6,0 }));
+		break;
+	}
+	case 'G':
+	{
+		int i = 5;
+		
+		for (int j = 0; j < i; j++) {
+			srand(time(NULL));
+			float r = rand() % 10+1;
+			
+			//pompas
+			bullets.push_back(new Mshot(1, { GetCamera()->getDir().x*r,GetCamera()->getDir().y * 10,GetCamera()->getDir().z + r }, { GetCamera()->getEye() }, 0.9, { 0,-0.2,0 }));
+		}
+		break;
+	}
+
 	default:
 		break;
 	}

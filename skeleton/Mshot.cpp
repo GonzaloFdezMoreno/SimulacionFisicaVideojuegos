@@ -1,14 +1,10 @@
 #include "Mshot.h"
 
-Mshot::Mshot(double masa,Vector3 vel,Vector3 pos,float damping,Vector3 accelerate){
+Mshot::Mshot(double masa,Vector3 vel,Vector3 pos,float damping,Vector3 accelerate):Particle(pos,vel,damping,accelerate) {
 
 	mass = masa;
 
-	veloc = vel;
-	posit = physx::PxTransform(pos.x, pos.y, pos.z);
-	damp = damping;
-	accel = accelerate;
-	renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(5)), &posit, { 0,0,1,1 });
+	//renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(5)), &posit, { 0,0,1,1 });
 }
 
 Mshot::~Mshot() {
@@ -21,7 +17,8 @@ void Mshot::integrate(double t) {
 	posit = physx::PxTransform(posit.p.x + veloc.x * t, posit.p.y + veloc.y * t, posit.p.z + veloc.z * t);
 	//con damping
 
-	veloc = mass*accel;
+	veloc += mass*accel;
 	veloc *= pow(damp, t);
+	
 
 }
