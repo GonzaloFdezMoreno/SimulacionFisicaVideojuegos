@@ -130,17 +130,20 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'F':
 	{
 		//bfuego
-		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.6,0 },{0.8,0.4,0,1}));
+		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 300 }, {GetCamera()->getEye() }, 0.9, { 0,0.5,0 },{0.8,0.4,0,1}));
 		break;
 	}
 	case 'G':
 	{
+		//pompas
 		
 			srand(time(NULL));
+			//aceleraciones aleatorias 
 			float rx = rand() % 2+0;
 			float ry = rand() % 2+1;
 			float rz = rand() % 2+0;
 
+			//para poner aceleraciones positivas y negativas  
 			float negx = rand() % 10+1;
 			float negy = rand() % 10+1;
 			float negz = rand() % 10+1;
@@ -155,7 +158,6 @@ void keyPress(unsigned char key, const PxTransform& camera)
 				rz=rz-(2*rz);
 			}
 
-			//pompas
 			bullets.push_back(new Mshot(0.1, {GetCamera()->getDir()*100 }, { GetCamera()->getEye() }, 0.7, { rx/10,ry/10,rz/10},{0,0,1,1}));
 		
 		break;
