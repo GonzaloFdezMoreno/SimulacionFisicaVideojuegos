@@ -1,11 +1,11 @@
 #include "Particle.h"
 
-Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate) {
+Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate,Vector4 color) {
 	veloc = vel;
 	posit = physx::PxTransform(pos.x, pos.y, pos.z);
 	damp = damping;
 	accel = accelerate;
-	renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(5)), &posit, { 0,0,1,1 });
+	renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(5)), &posit, color);
 
 }
 

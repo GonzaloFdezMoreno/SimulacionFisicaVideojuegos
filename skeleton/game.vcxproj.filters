@@ -16,6 +16,9 @@
     <ClCompile Include="Mshot.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -31,6 +34,9 @@
       <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="Mshot.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
       <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,7 +7,7 @@
 class Mshot:public Particle {
 
 public:
-	Mshot(double mass,Vector3 vel, Vector3 pos, float damping, Vector3 accelerate);
+	Mshot(double mass,Vector3 vel, Vector3 pos, float damping, Vector3 accelerate,Vector4 color);
 	~Mshot();
 
 	

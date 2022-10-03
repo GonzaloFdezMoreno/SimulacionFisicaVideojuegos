@@ -11,6 +11,7 @@
 #include <iostream>
 #include "Particle.h"
 #include "Mshot.h"
+#include "Plane.h"
 
 
 
@@ -34,6 +35,7 @@ ContactReportCallback gContactReportCallback;
 
 Particle* partic = NULL;
 std::vector<Mshot*> bullets ;
+Plane* plan = NULL;
 
 
 // Initialize physics engine
@@ -62,6 +64,8 @@ void initPhysics(bool interactive)
 
 	//Añadir elementos
 	//partic = new Particle({ 0,50,0 },{ -10,20,0 }, 0.9, {0,-9.8,0});
+	plan = new Plane({ 0,-100,0 }, { 0,1,0,1 });
+
 	
 	}
 
@@ -109,37 +113,51 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'B':
 		//pistola
-		bullets.push_back(new Mshot(2, { GetCamera()->getDir()*2500}, {GetCamera()->getEye()}, 0.99, {0,-0.5,0}));
+		bullets.push_back(new Mshot(2, { GetCamera()->getDir() * 2500 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1}));
 		
 		break;
 	case 'L': {
 		//laser
-		bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 10000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 }));
+		bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 10000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 },{1,0,0,1}));
 		break; 
 	}
 	case 'C':
 	{
 		//canyon
-		bullets.push_back(new Mshot(100, { GetCamera()->getDir().x,GetCamera()->getDir().y *2000,GetCamera()->getDir().z *1000 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 }));
+		bullets.push_back(new Mshot(3, {GetCamera()->getDir() *1500 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 },{0.7,0.6,0.2,1}));
 		break;
 	}
 	case 'F':
 	{
 		//bfuego
-		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.6,0 }));
+		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.6,0 },{0.8,0.4,0,1}));
 		break;
 	}
 	case 'G':
 	{
-		int i = 5;
 		
-		for (int j = 0; j < i; j++) {
 			srand(time(NULL));
-			float r = rand() % 10+1;
-			
+			float rx = rand() % 2+0;
+			float ry = rand() % 2+1;
+			float rz = rand() % 2+0;
+
+			float negx = rand() % 10+1;
+			float negy = rand() % 10+1;
+			float negz = rand() % 10+1;
+
+			if (negx < 5) {
+				rx=rx-(2*rx);
+			}
+			else if (negy < 5) {
+				ry=ry-(2*ry);
+			}
+			else if (negz < 5) {
+				rz=rz-(2*rz);
+			}
+
 			//pompas
-			bullets.push_back(new Mshot(1, { GetCamera()->getDir().x*r,GetCamera()->getDir().y * 10,GetCamera()->getDir().z + r }, { GetCamera()->getEye() }, 0.9, { 0,-0.2,0 }));
-		}
+			bullets.push_back(new Mshot(0.1, {GetCamera()->getDir()*100 }, { GetCamera()->getEye() }, 0.7, { rx/10,ry/10,rz/10},{0,0,1,1}));
+		
 		break;
 	}
 

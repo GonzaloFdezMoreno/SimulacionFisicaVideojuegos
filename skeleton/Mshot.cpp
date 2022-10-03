@@ -1,6 +1,6 @@
 #include "Mshot.h"
 
-Mshot::Mshot(double masa,Vector3 vel,Vector3 pos,float damping,Vector3 accelerate):Particle(pos,vel,damping,accelerate) {
+Mshot::Mshot(double masa,Vector3 vel,Vector3 pos,float damping,Vector3 accelerate,Vector4 color):Particle(pos,vel,damping,accelerate,color) {
 
 	mass = masa;
 
