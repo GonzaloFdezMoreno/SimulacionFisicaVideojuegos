@@ -22,3 +22,4 @@ void Particle::integrate(double t) {
 	veloc *= pow(damp, t);
 	
 }
+

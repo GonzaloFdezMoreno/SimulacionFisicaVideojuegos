@@ -113,24 +113,24 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'B':
 		//pistola
-		bullets.push_back(new Mshot(2, { GetCamera()->getDir() * 2500 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1},2));
+		bullets.push_back(new Mshot(0.4, { GetCamera()->getDir() * 250 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1},2));
 		
 		break;
 	case 'L': {
 		//laser
-		bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 10000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 },{1,0,0,1},2));
+		bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 1000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 },{1,0,0,1},2));
 		break; 
 	}
 	case 'C':
 	{
 		//canyon
-		bullets.push_back(new Mshot(3, {GetCamera()->getDir() *1500 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 },{0.7,0.6,0.2,1},5));
+		bullets.push_back(new Mshot(5, {GetCamera()->getDir() *150 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 },{0.7,0.6,0.2,1},5));
 		break;
 	}
 	case 'F':
 	{
 		//bfuego
-		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 300 }, {GetCamera()->getEye() }, 0.9, { 0,0.5,0 },{0.8,0.4,0,1},5));
+		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.5,0 },{0.8,0.4,0,1},5));
 		break;
 	}
 	case 'G':

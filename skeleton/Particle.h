@@ -9,7 +9,7 @@ public:
 	~Particle();
 
 	void integrate(double t); //es el update
-	 
+	virtual Particle* clone()const;
 
 protected:
 	Vector3 veloc;

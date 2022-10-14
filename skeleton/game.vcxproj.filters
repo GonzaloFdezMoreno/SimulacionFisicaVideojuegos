@@ -19,6 +19,18 @@
     <ClCompile Include="Plane.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="UniformParticleGenerator.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianParticleGenerator.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -43,6 +55,12 @@
       <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="ParticleGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformParticleGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianParticleGenerator.h">
       <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
