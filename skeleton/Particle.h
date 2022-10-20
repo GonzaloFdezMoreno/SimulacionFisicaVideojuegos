@@ -9,7 +9,8 @@ public:
 	~Particle();
 
 	void integrate(double t); //es el update
-	virtual Particle* clone()const;
+	//virtual Particle* clone()const;
+	bool die = false;
 
 protected:
 	Vector3 veloc;
@@ -17,4 +18,7 @@ protected:
 	RenderItem* renderItemPart;
 	float damp;
 	Vector3 accel;
+
+	float timeAlive = 0;
+	
 };

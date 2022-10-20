@@ -6,12 +6,17 @@ Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate,Vect
 	damp = damping;
 	accel = accelerate;
 	renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(tam)), &posit, color);
+	//RegisterRenderItem(renderItemPart);
 
 }
 
 Particle::~Particle() {
-	renderItemPart = nullptr;
-	DeregisterRenderItem(renderItemPart);
+	    delete renderItemPart;
+		renderItemPart = nullptr;
+		
+		DeregisterRenderItem(renderItemPart);
+		
+	
 	
 }
 void Particle::integrate(double t) {
@@ -20,6 +25,10 @@ void Particle::integrate(double t) {
 	//con damping
 	veloc += accel * t;
 	veloc *= pow(damp, t);
+	timeAlive++;
 	
+	if (timeAlive > 500) {
+		die = true;
+	}
 }
 

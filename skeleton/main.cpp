@@ -12,6 +12,7 @@
 #include "Particle.h"
 #include "Mshot.h"
 #include "Plane.h"
+#include "ParticleSystem.h"
 
 
 
@@ -36,6 +37,7 @@ ContactReportCallback gContactReportCallback;
 Particle* partic = NULL;
 std::vector<Mshot*> bullets ;
 Plane* plan = NULL;
+ParticleSystem* psys = NULL;
 
 
 // Initialize physics engine
@@ -66,6 +68,8 @@ void initPhysics(bool interactive)
 	//partic = new Particle({ 0,50,0 },{ -10,20,0 }, 0.9, {0,-9.8,0});
 	plan = new Plane({ 0,-100,0 }, { 0,1,0,1 });
 
+	psys = new ParticleSystem(2);
+
 	
 	}
 
@@ -83,6 +87,7 @@ void stepPhysics(bool interactive, double t)
 	for(auto b:bullets)
 	//partic->integrate(t);
 	b->integrate(t);
+	psys->update(t);
 }
 
 // Function to clean data
