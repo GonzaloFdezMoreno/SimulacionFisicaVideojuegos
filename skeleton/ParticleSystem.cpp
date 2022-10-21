@@ -8,6 +8,9 @@ ParticleSystem::ParticleSystem(int npart) {
 	_particles.push_back(pa);*/
 	//gPG = new GaussianParticleGenerator({ 2,2,0 }, { 1,2,1 });
 	nump = npart;
+	srand(time(NULL));
+
+
 
 }
 ParticleSystem::~ParticleSystem() {
@@ -20,7 +23,7 @@ void ParticleSystem::update(double t) {
 	
 	for (int i = 0; i < nump; i++) {
 		
-		srand(time(NULL));
+		//srand(time(NULL));
 		float rx = rand() % 50;
 		//float ry = rand() % 4 + 1;
 		float rz = rand() % 50;
@@ -33,7 +36,7 @@ void ParticleSystem::update(double t) {
 		float negy = rand() % 10 + 1;
 		float negz = rand() % 10 + 1;
 
-		int tamrnd = rand() % 4 + 1;
+		//int tamrnd = rand() % 4 + 1;
 
 		if (negx < 5) {
 			vx = vx - (2 * vx);
@@ -45,7 +48,7 @@ void ParticleSystem::update(double t) {
 			vz = vz - (2 * vz);
 		}
 
-		std::list<Particle*> pa = uPG->generateParticles({ rx,0,rz }, { vx,vy,vz });
+		std::list<Particle*> pa = uPG->generateParticles({ rx,20,rz }, { vx,vy,vz });
 
 		for (auto pl : pa) {
 			_particles.push_back(pl);
@@ -54,11 +57,18 @@ void ParticleSystem::update(double t) {
 		
 	}
 
-	for (auto pt : _particles) {
-		pt->integrate(t);
-		if (pt->die) {
-			pt->~Particle();
+	for (auto pt = _particles.begin(); pt!=_particles.end();) {
+		
+		(*pt)->integrate(t);
+
+		if (( * pt)->die) {
+			delete *pt;
+			pt=_particles.erase(pt);
 		}
+		else {
+			pt++ ;
+		}
+
 	}
 	
 }

@@ -4,6 +4,8 @@
 
 GaussianParticleGenerator::GaussianParticleGenerator(Vector3 pos,Vector3 vel):ParticleGenerator(pos,vel) {
 
+	std_dev_pos =pos;
+
 }
 GaussianParticleGenerator::~GaussianParticleGenerator() {
 

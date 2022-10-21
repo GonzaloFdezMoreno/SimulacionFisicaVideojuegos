@@ -24,5 +24,7 @@ public:
 
 	ParticleGenerator* uPG = nullptr;
 	ParticleGenerator* gPG = nullptr;
+	ParticleGenerator* fireworkSysGen = nullptr;
+
 
 };

@@ -10,6 +10,7 @@ protected:
 	double std_dev_t;
 
 	std::normal_distribution<double> dis{ 0,1 };
+	std::normal_distribution<double> vel{ 15, 2 };
 	
 public:
 	GaussianParticleGenerator(Vector3 std_dev_pos,Vector3 std_dev_vel);

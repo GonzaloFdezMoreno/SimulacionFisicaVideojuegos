@@ -11,12 +11,11 @@ Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate,Vect
 }
 
 Particle::~Particle() {
-	    delete renderItemPart;
-		renderItemPart = nullptr;
+	   // delete renderItemPart;
 		
 		DeregisterRenderItem(renderItemPart);
 		
-	
+		renderItemPart = nullptr;
 	
 }
 void Particle::integrate(double t) {

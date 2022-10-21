@@ -31,6 +31,9 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Firework.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -61,6 +64,9 @@
       <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="GaussianParticleGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Firework.h">
       <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
