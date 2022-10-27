@@ -2,11 +2,17 @@
 
 ParticleSystem::ParticleSystem(int npart) {
 
-	uPG=new UniformParticleGenerator({ 2,2,0 }, { 1,2,1 });
-	_particles_generators.push_back(uPG);
+	/*uPG=new UniformParticleGenerator({ 2,2,0 }, { 1,2,1 });
+	_particles_generators.push_back(uPG);*/
+
+	fireworkSysGen = new FireworkGenerator({ 0,20,0 }, { 0,100,0 });
+	//_particles_generators.push_back(fireworkSysGen);
+
 	/*Particle* pa = new Particle({ 0,30,0 }, { 0,-3,0 }, 1, { 3,10,7 }, { 0,0.6,1,1 }, 3);
 	_particles.push_back(pa);*/
-	//gPG = new GaussianParticleGenerator({ 2,2,0 }, { 1,2,1 });
+	gPG = new GaussianParticleGenerator({ 2,2,0 }, { 1,2,1 });
+	_particles_generators.push_back(gPG);
+
 	nump = npart;
 	srand(time(NULL));
 
@@ -21,46 +27,32 @@ ParticleSystem::~ParticleSystem() {
 void ParticleSystem::update(double t) {
 
 	
-	for (int i = 0; i < nump; i++) {
+	//for (int i = 0; i < 1; i++) {
 		
-		//srand(time(NULL));
-		float rx = rand() % 50;
-		//float ry = rand() % 4 + 1;
-		float rz = rand() % 50;
+		
+		
+		
 
-		float vx = rand() % 10;
-		float vy = rand() % 10;
-		float vz = rand() % 10;
-
-		float negx = rand() % 10 + 1;
-		float negy = rand() % 10 + 1;
-		float negz = rand() % 10 + 1;
-
-		//int tamrnd = rand() % 4 + 1;
-
-		if (negx < 5) {
-			vx = vx - (2 * vx);
-		}
-		else if (negy < 5) {
-			vy = vy - (2 * vy);
-		}
-		else if (negz < 5) {
-			vz = vz - (2 * vz);
-		}
-
-		std::list<Particle*> pa = uPG->generateParticles({ rx,20,rz }, { vx,vy,vz });
+		//std::list<Particle*> pa = uPG->generateParticles();
+		std::list<Particle*> pa = gPG->generateParticles();
 
 		for (auto pl : pa) {
 			_particles.push_back(pl);
 			
 		}
-		
-	}
+
+		if (activate) {
+			generateFireworkSystem();
+		}
+	//}
 
 	for (auto pt = _particles.begin(); pt!=_particles.end();) {
-		
-		(*pt)->integrate(t);
-
+		if (!(*pt)->isFire) {
+			(*pt)->integrate(t);
+		}
+		else {
+			
+		}
 		if (( * pt)->die) {
 			delete *pt;
 			pt=_particles.erase(pt);
@@ -70,11 +62,58 @@ void ParticleSystem::update(double t) {
 		}
 
 	}
+
+	for (auto fw = _fireworks.begin(); fw != _fireworks.end();) {
+		if ((*fw)->isFire) {
+			(*fw)->update(t);
+		}
+		else {
+
+		}
+
+		if ((*fw)->explodes && !(*fw)->ended) {
+			std::list<Particle*> exp = (*fw)->explode();
+			for (auto pt : exp) {
+				_particles.push_back(pt);
+
+			}
+			//std::list<Particle*> fir;
+			/*GaussianParticleGenerator* genF = new GaussianParticleGenerator({20,20,20}, { 3,3,3 });
+			for (int i = 0; i < 25; i++) {
+				std::list<Particle*>ep = (genF->generateParticles());
+				for (auto prt : ep) {
+					_particles.push_back(prt);
+
+				}
+
+			}*/
+		}
+		if ((*fw)->die) {
+			
+			delete* fw;
+			fw = _fireworks.erase(fw);
+		}
+		
+		else {
+			fw++;
+		}
+
+	}
+
 	
 }
 //ParticleGenerator* ParticleSystem::getParticleGenerator(string nombre) {
 //
 //}
 void ParticleSystem::generateFireworkSystem() {
+	std::list<Firework*> fir = fireworkSysGen->generateParticles();
 
+	for (auto pl : fir) {
+
+		_fireworks.push_back(pl);
+
+	}
+	activate = false;
+   
 }
+

@@ -16,5 +16,5 @@ public:
 	UniformParticleGenerator(Vector3 vel,Vector3 pos);
 	~UniformParticleGenerator();
 	void update(double t);
-	std::list<Particle*> generateParticles(Vector3 vel, Vector3 pos) override;
+	std::list<Particle*> generateParticles() override;
 };

@@ -13,6 +13,7 @@
 #include "Mshot.h"
 #include "Plane.h"
 #include "ParticleSystem.h"
+#include "Firework.h"
 
 
 
@@ -38,6 +39,8 @@ Particle* partic = NULL;
 std::vector<Mshot*> bullets ;
 Plane* plan = NULL;
 ParticleSystem* psys = NULL;
+//Firework* fwo = NULL;
+std::vector<Firework*> fwoVec;
 
 
 // Initialize physics engine
@@ -87,7 +90,12 @@ void stepPhysics(bool interactive, double t)
 	for(auto b:bullets)
 	//partic->integrate(t);
 	b->integrate(t);
+
+	if(psys!=NULL)
 	psys->update(t);
+
+	//mejor crear el generador de fuegos
+	
 }
 
 // Function to clean data
@@ -135,7 +143,10 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'F':
 	{
 		//bfuego
-		bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.5,0 },{0.8,0.4,0,1},5));
+		//bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.5,0 },{0.8,0.4,0,1},5));
+
+		//fuegos artificiales
+		psys->activate = true;
 		break;
 	}
 	case 'G':

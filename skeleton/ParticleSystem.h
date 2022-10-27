@@ -2,9 +2,11 @@
 #include <list>
 #include <iostream>
 #include "Particle.h"
+#include "Firework.h"
 #include "ParticleGenerator.h"
 #include "UniformParticleGenerator.h"
 #include "GaussianParticleGenerator.h"
+#include "FireworkGenerator.h"
 #include <string>
 
 using namespace std;
@@ -12,6 +14,7 @@ using namespace std;
 class ParticleSystem {
 protected:
 	std::list<Particle*> _particles;
+	std::list<Firework*> _fireworks;
 	std::list<ParticleGenerator*> _particles_generators;
 	Vector3 gravity;
 	int nump;
@@ -24,7 +27,9 @@ public:
 
 	ParticleGenerator* uPG = nullptr;
 	ParticleGenerator* gPG = nullptr;
-	ParticleGenerator* fireworkSysGen = nullptr;
+	FireworkGenerator* fireworkSysGen = nullptr;
+
+	bool activate = false;
 
 
 };

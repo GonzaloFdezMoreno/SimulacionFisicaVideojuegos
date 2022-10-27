@@ -11,10 +11,13 @@ public:
 	void integrate(double t); //es el update
 	//virtual Particle* clone()const;
 	bool die = false;
+	bool isFire = false;
+
+	physx::PxTransform posit;
 
 protected:
 	Vector3 veloc;
-	physx::PxTransform posit;
+	
 	RenderItem* renderItemPart;
 	float damp;
 	Vector3 accel;

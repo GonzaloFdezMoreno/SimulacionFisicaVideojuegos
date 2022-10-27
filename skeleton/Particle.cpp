@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include <time.h>
 
 Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate,Vector4 color,int tam) {
 	veloc = vel;
@@ -7,6 +8,8 @@ Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate,Vect
 	accel = accelerate;
 	renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(tam)), &posit, color);
 	//RegisterRenderItem(renderItemPart);
+
+	//srand(time(NULL));
 
 }
 
@@ -27,7 +30,10 @@ void Particle::integrate(double t) {
 	timeAlive++;
 	
 	if (timeAlive > 500) {
+
 		die = true;
 	}
+
+
 }
 

@@ -16,6 +16,8 @@ public:
 	ParticleGenerator(Vector3 pos,Vector3 vel);
 	~ParticleGenerator();
 	void setParticle(Particle* model);
-	virtual std::list<Particle*> generateParticles(Vector3 pos, Vector3 vel) = 0;
+	virtual std::list<Particle*> generateParticles() = 0;
+
+	//virtual std::list<Firework*> genFw();
 
 };
