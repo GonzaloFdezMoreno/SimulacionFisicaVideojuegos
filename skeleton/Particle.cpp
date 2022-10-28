@@ -21,7 +21,7 @@ Particle::~Particle() {
 		renderItemPart = nullptr;
 	
 }
-void Particle::integrate(double t) {
+void Particle::update(double t) {
 	//velocidad constante
 	posit = physx::PxTransform(posit.p.x + veloc.x * t, posit.p.y + veloc.y * t, posit.p.z + veloc.z * t);
 	//con damping

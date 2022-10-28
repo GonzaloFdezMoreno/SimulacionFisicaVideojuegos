@@ -27,7 +27,8 @@ public:
 
 	ParticleGenerator* uPG = nullptr;
 	ParticleGenerator* gPG = nullptr;
-	FireworkGenerator* fireworkSysGen = nullptr;
+	//FireworkGenerator* fireworkSysGen = nullptr;
+	ParticleGenerator* fireworkSysGen = nullptr;
 
 	bool activate = false;
 

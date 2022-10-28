@@ -5,7 +5,7 @@
 
 Firework::Firework(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam):Particle(pos,vel,damping,accelerate,color,tam) {
 	
-	isFire = true;
+	//isFire = true;
 	
 }
 
@@ -16,7 +16,7 @@ Firework::~Firework() {
 
 void Firework::update(double t){
 	if(timeAlive>500&&!ended){
-		explodes = true;
+		explode();
 		
 	}
 	if (timeAlive > 500) {

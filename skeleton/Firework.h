@@ -5,6 +5,7 @@
 #include "Particle.h"
 //#include "GaussianParticleGenerator.h"
 //#include "UniformParticleGenerator.h"
+
 #include <list>
 #include <random>
 
@@ -15,8 +16,9 @@ public:
 	~Firework();
 
 
-	void update(double t);
-	std::list<Particle*>  explode();
+	void update(double t) override;
+	std::list<Particle*>  explode() override;
+	
 	bool explodes = false;
 
 	bool ended = false;

@@ -5,7 +5,7 @@
 #include <list>
 #include <random>
 
-class FireworkGenerator {
+class FireworkGenerator:public ParticleGenerator {
 protected:
 	Vector3 std_dev_pos;
 	Vector3 std_dev_vel;
@@ -17,7 +17,8 @@ protected:
 public:
 	FireworkGenerator(Vector3 std_dev_pos, Vector3 std_dev_vel);
 	~FireworkGenerator();
-	std::list<Firework*> generateParticles(); 
+	//std::list<Firework*> generateParticles(); 
+	std::list<Particle*> generateParticles() override; 
 
 	
 
