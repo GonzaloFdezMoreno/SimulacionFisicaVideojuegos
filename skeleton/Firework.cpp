@@ -15,13 +15,13 @@ Firework::~Firework() {
 
 
 void Firework::update(double t){
-	if(timeAlive>500&&!ended){
-		explode();
-		
-	}
-	if (timeAlive > 500) {
+	if(timeAlive>500){
+		//explode();
 		die = true;
 	}
+	/*if (timeAlive > 500) {
+		
+	}*/
 	posit = physx::PxTransform(posit.p.x + veloc.x * t, posit.p.y + veloc.y * t, posit.p.z + veloc.z * t);
 	//con damping
 

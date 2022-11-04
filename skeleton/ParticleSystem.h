@@ -31,6 +31,7 @@ public:
 	ParticleGenerator* fireworkSysGen = nullptr;
 
 	bool activate = false;
+	bool getgrav = false;
 
 
 };

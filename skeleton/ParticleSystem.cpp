@@ -47,12 +47,10 @@ void ParticleSystem::update(double t) {
 	//}
 
 	for (auto pt = _particles.begin(); pt!=_particles.end();) {
-		if (!(*pt)->isFire) {
+		
 			(*pt)->update(t);
-		}
-		else {
-			
-		}
+		
+		
 
 		if (( * pt)->die) {
 			std::list<Particle*> exp = (*pt)->explode();

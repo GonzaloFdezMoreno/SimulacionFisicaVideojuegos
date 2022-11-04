@@ -149,7 +149,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		psys->activate = true;
 		break;
 	}
-	case 'G':
+	case 'P':
 	{
 		//pompas
 		
@@ -180,6 +180,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		
 		break;
 	}
+
+	case 'G':
+
+		psys->getgrav = true;
+
+		break;
 
 	default:
 		break;
