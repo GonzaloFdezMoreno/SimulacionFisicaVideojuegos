@@ -75,6 +75,15 @@
     <ClInclude Include="FireworkGenerator.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceRegistry.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityForceGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

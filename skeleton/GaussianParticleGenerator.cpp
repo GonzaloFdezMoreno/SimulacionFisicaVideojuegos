@@ -23,9 +23,9 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles() {
 	float vy = rand() % 10;
 	float vz = rand() % 10;*/
 
-	auto vx = std::normal_distribution<float>{ 10, 1 }; 
-	auto vy = std::normal_distribution<float>{ 10, 1 };
-	auto vz = std::normal_distribution<float>{10, 1 };
+	auto vx = std::normal_distribution<float>{ 1, 5 }; 
+	auto vy = std::normal_distribution<float>{ 1, 1 };
+	auto vz = std::normal_distribution<float>{1, 1 };
 
 	float negx = rand() % 10 + 1;
 	float negy = rand() % 10 + 1;

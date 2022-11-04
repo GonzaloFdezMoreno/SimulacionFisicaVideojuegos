@@ -273,9 +273,12 @@
     <ClInclude Include="core.hpp" />
     <ClInclude Include="Firework.h" />
     <ClInclude Include="FireworkGenerator.h" />
+    <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GaussianParticleGenerator.h" />
+    <ClInclude Include="GravityForceGenerator.h" />
     <ClInclude Include="Mshot.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleForceRegistry.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Plane.h" />
