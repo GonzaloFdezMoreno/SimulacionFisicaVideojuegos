@@ -182,10 +182,28 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 
 	case 'G':
-
-		psys->getgrav = true;
+		if (!psys->getgrav) {
+			psys->getgrav = true;
+		}
+		
+		break;
+	case 'Ngg':
+		if (!psys->getgrav) {
+			psys->getgrav = true;
+		}
+		
+		break;
+	case 'X':
+		//desactivar
+		if (psys->getgrav) {
+			psys->getgrav = false;
+		}
+		if (psys->getwind) {
+			psys->getwind = false;
+		}
 
 		break;
+
 
 	default:
 		break;

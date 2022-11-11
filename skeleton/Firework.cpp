@@ -3,7 +3,7 @@
 
 
 
-Firework::Firework(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam):Particle(pos,vel,damping,accelerate,color,tam) {
+Firework::Firework(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam):Particle(pos,vel,damping,accelerate,color,tam,0) {
 	
 	//isFire = true;
 	
@@ -67,7 +67,7 @@ std::list<Particle*> Firework::explode() {
 		}
 	
 		//srand(time(NULL));
-		Particle* prt = new Particle(posit.p, velc*2, 0.5, { 0,-1,0 }, { 0,1,1,1 }, 1);
+		Particle* prt = new Particle(posit.p, velc*2, 0.5, { 0,-1,0 }, { 0,1,1,1 }, 1,0);
 			fir.push_back(prt);
 
 		//}

@@ -4,9 +4,10 @@
 #include <list>
 
 
+
 class Particle {
 public:
-	Particle(Vector3 pos, Vector3 vel,float dapming,Vector3 accel,Vector4 color,int tam);
+	Particle(Vector3 pos, Vector3 vel,float dapming,Vector3 accel,Vector4 color,int tam, double mass);
 	~Particle();
 
 	virtual void update(double t); //es el update
@@ -16,14 +17,23 @@ public:
 	bool isFire = false;
 
 	physx::PxTransform posit;
+	Vector3 veloc;
+	float damp;
+	float inv_mass;
+	
+	//bool wiGravity = false;
+	//bool wiWind = false;
 
 protected:
-	Vector3 veloc;
+	
 	
 	RenderItem* renderItemPart;
-	float damp;
+	
 	Vector3 accel;
+	double masa;
 
 	float timeAlive = 0;
+
+	
 	
 };

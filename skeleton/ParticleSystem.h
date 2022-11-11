@@ -7,6 +7,8 @@
 #include "UniformParticleGenerator.h"
 #include "GaussianParticleGenerator.h"
 #include "FireworkGenerator.h"
+
+#include "GravityForceGenerator.h"
 #include <string>
 
 using namespace std;
@@ -30,8 +32,10 @@ public:
 	//FireworkGenerator* fireworkSysGen = nullptr;
 	ParticleGenerator* fireworkSysGen = nullptr;
 
+	GravityForceGenerator* gforceGen = nullptr;
+
 	bool activate = false;
 	bool getgrav = false;
-
+	bool getwind = false;
 
 };

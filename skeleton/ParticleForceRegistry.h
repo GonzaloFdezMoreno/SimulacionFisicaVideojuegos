@@ -7,6 +7,11 @@ typedef std::pair<ForceGenerator*, Particle*> frPair;
 
 class ParticleForceRegistry :public std::multimap<ForceGenerator*, Particle*> {
 public:
+	//afecta a las áreas solo
+	frPair regist;
+	ParticleForceRegistry(frPair reg) {}
+	~ParticleForceRegistry(){}
+
 	void updateForces(double t) {
 		for (auto it = begin(); it != end(); it++) {
 			it->first->updateForce(it->second, t);
@@ -14,14 +19,14 @@ public:
 	}
 
 	void addRegistry(ForceGenerator* fg,Particle* p){
-		/*auto it = begin();
+		auto it = begin();
 		while (it->first != nullptr) {
 			it++;
 		}
-		it->first = fg;
-		it->second = p;
-		insert(it);*/
-			
+		*it->first = *fg;
+		*it->second = *p;
+		insert(*it);
+		
 	}
 
 	void deleteParticleRegistry(Particle* p) {
@@ -33,4 +38,5 @@ public:
 			erase(it);
 		}
 	}
+
 };

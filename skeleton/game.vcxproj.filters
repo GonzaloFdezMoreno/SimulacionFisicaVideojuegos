@@ -84,6 +84,9 @@
     <ClInclude Include="GravityForceGenerator.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="WindForceGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -16,6 +16,7 @@ ParticleSystem::ParticleSystem(int npart) {
 	nump = npart;
 	srand(time(NULL));
 
+	gforceGen = new GravityForceGenerator({ 0,-9.8,0 });
 
 
 }
@@ -25,12 +26,12 @@ ParticleSystem::~ParticleSystem() {
 }
 
 void ParticleSystem::update(double t) {
-
+	
 	
 	//for (int i = 0; i < 1; i++) {
 		
 		
-		
+	
 		
 
 		//std::list<Particle*> pa = uPG->generateParticles();
@@ -47,9 +48,12 @@ void ParticleSystem::update(double t) {
 	//}
 
 	for (auto pt = _particles.begin(); pt!=_particles.end();) {
-		
+		if (getgrav) {
+			gforceGen->updateForce((*pt), t);
+		}
+		else {
 			(*pt)->update(t);
-		
+		}
 		
 
 		if (( * pt)->die) {

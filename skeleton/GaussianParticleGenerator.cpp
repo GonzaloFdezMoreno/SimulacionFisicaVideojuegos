@@ -46,7 +46,7 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles() {
 		velc.z = -velc.z;
 	}
 
-	Particle* part = new Particle({ rx,20,rz } /* std_dev_pos */,velc, 1, {0,0,0}, {0,0.6,1,1}, 1);
+	Particle* part = new Particle({ rx,100,rz } /* std_dev_pos */,velc, 1, {0,0,0}, {0,0.6,1,1}, 1,0);
 	lPart.push_back(part);
 
 
