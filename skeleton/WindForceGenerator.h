@@ -5,19 +5,34 @@
 
 class WindForceGenerator : public ForceGenerator {
 public:
-	WindForceGenerator(const Vector3& w) {
-		_windir = w;
+	WindForceGenerator(const Vector3& w,float ka,float kb):_windir(w),k1(ka),k2(kb) {
+		area = new Particle({20,100,0}, {0,0,0}, 0, {0,0,0}, {0,0,0,0.0}, 20, 0);
 	}
-	~WindForceGenerator() {}
+	~WindForceGenerator() { delete area; }
 	virtual void updateForce(Particle* particle, double t) {
-		particle->posit = physx::PxTransform(particle->posit.p.x + particle->veloc.x * t, particle->posit.p.y + particle->veloc.y * t, particle->posit.p.z + particle->veloc.z * t);
-		//con damping
-		particle->veloc += _windir * ;
-		particle->veloc *= pow(particle->damp, t);
+		if (fabs(particle->inv_mass) < 1e-10) return;
+
+
+		float x = (particle->posit.p.x - area->posit.p.x) * (particle->posit.p.x - area->posit.p.x);
+		float y = (particle->posit.p.y - area->posit.p.y) * (particle->posit.p.y - area->posit.p.y);
+		float z = (particle->posit.p.z - area->posit.p.z) * (particle->posit.p.z - area->posit.p.z);
+
+		if (sqrt(x + y + z) < 20||inarea) {
+
+
+			Vector3 pVel = particle->veloc;
+			Vector3 resVel = pVel-_windir;
+
+			Vector3 force = k1 * resVel+ k2 * resVel.normalize() * resVel;
+			particle->addForce(force/10);
+		}
 
 	}
-	//inline void setGravity(Vector3 g) { _gravity = g; }
+	
 
 protected:
+	Particle* area;
 	Vector3 _windir;
+	float k1, k2;
+	bool inarea = false;
 };

@@ -87,6 +87,12 @@
     <ClInclude Include="WindForceGenerator.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="ExplosionForceGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="WhirlpoolForceGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

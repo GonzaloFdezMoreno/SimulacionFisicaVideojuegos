@@ -12,6 +12,9 @@ public:
 
 	virtual void update(double t); //es el update
 	virtual std::list<Particle*>  explode() { std::list<Particle*> lst; return lst; };
+
+	void addForce(Vector3 f) { force += f; }
+	void noForce() { force *= 0; }
 	//virtual Particle* clone()const;
 	bool die = false;
 	bool isFire = false;
@@ -20,6 +23,7 @@ public:
 	Vector3 veloc;
 	float damp;
 	float inv_mass;
+	double masa;
 	
 	//bool wiGravity = false;
 	//bool wiWind = false;
@@ -30,10 +34,10 @@ protected:
 	RenderItem* renderItemPart;
 	
 	Vector3 accel;
-	double masa;
+	
 
 	float timeAlive = 0;
 
-	
+	Vector3 force;
 	
 };

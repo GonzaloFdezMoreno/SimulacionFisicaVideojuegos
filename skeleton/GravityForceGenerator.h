@@ -14,11 +14,12 @@ public:
 		if (fabs(particle->inv_mass) < 1e-10)
 			return;
 			
-			particle->posit = physx::PxTransform(particle->posit.p.x + particle->veloc.x * t, particle->posit.p.y + particle->veloc.y * t, particle->posit.p.z + particle->veloc.z * t);
-			//con damping
+			//particle->posit = physx::PxTransform(particle->posit.p.x + particle->veloc.x * t, particle->posit.p.y + particle->veloc.y * t, particle->posit.p.z + particle->veloc.z * t);
+			////con damping
 
-			particle->veloc += _gravity * t;
-			particle->veloc *= pow(particle->damp, t);
+			//particle->veloc += _gravity * t;
+			//particle->veloc *= pow(particle->damp, t);
+		particle->addForce(_gravity*particle->masa);
 		
 	}
 	//inline void setGravity(Vector3 g) { _gravity = g; }

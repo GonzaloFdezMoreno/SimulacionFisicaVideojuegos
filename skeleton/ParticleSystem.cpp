@@ -12,11 +12,14 @@ ParticleSystem::ParticleSystem(int npart) {
 	_particles.push_back(pa);*/
 	gPG = new GaussianParticleGenerator({ 2,2,0 }, { 1,2,1 });
 	_particles_generators.push_back(gPG);
-
+	 
+	regfor = new ParticleForceRegistry();
+	
 	nump = npart;
 	srand(time(NULL));
 
 	gforceGen = new GravityForceGenerator({ 0,-9.8,0 });
+	whForceGen = new WhirlpoolForceGenerator(1, 0.5, { 20,100,20 },0.4);
 
 
 }
@@ -47,13 +50,27 @@ void ParticleSystem::update(double t) {
 		}
 	//}
 
+		regfor->updateForces(t);
+
 	for (auto pt = _particles.begin(); pt!=_particles.end();) {
 		if (getgrav) {
-			gforceGen->updateForce((*pt), t);
+			regfor->addRegistry(gforceGen, (*pt));
 		}
-		else {
-			(*pt)->update(t);
+		if (getwind) {
+			if(wforceGen!=nullptr)
+			regfor->addRegistry(wforceGen, (*pt));
 		}
+		if (getexplosion) {
+			if(expForceGen!=nullptr)
+			regfor->addRegistry(expForceGen, (*pt));
+		}
+		if (getWhirl) {
+			regfor->addRegistry(whForceGen, (*pt));
+		}
+
+		
+		(*pt)->update(t);
+		 
 		
 
 		if (( * pt)->die) {
@@ -62,6 +79,7 @@ void ParticleSystem::update(double t) {
 				_particles.push_back(pl);
 
 			}
+			regfor->deleteParticleRegistry((*pt));
 			delete *pt;
 			pt=_particles.erase(pt);
 		}
@@ -125,3 +143,17 @@ void ParticleSystem::generateFireworkSystem() {
    
 }
 
+void ParticleSystem::createExplosionForce() {
+	
+	expForceGen = new ExplosionForceGenerator({ 30,100,20 }, 30);
+}
+
+void ParticleSystem::createwindAreaForce() {
+	wforceGen = new WindForceGenerator({ 0,5,0 }, 0.5, 0);
+}
+
+void ParticleSystem::eraseForces() {
+	
+	wforceGen = nullptr;
+	expForceGen = nullptr;
+}

@@ -187,9 +187,26 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		}
 		
 		break;
-	case 'Ngg':
-		if (!psys->getgrav) {
-			psys->getgrav = true;
+	case 'T':
+		if (!psys->getwind) {
+			psys->getwind = true;
+			psys->createwindAreaForce();
+		}
+		
+		break;
+	
+	case 'U':
+		if (!psys->getexplosion) {
+			psys->getexplosion = true;
+			psys->createExplosionForce();
+		}
+		
+		break;
+	
+	case 'H':
+		if (!psys->getWhirl) {
+			psys->getWhirl = true;
+			
 		}
 		
 		break;
@@ -201,6 +218,13 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		if (psys->getwind) {
 			psys->getwind = false;
 		}
+		if (!psys->getexplosion) {
+			psys->getexplosion = false;
+		}
+		if (psys->getWhirl) {
+			psys->getWhirl = false;
+		}
+		psys->eraseForces();
 
 		break;
 
