@@ -13,11 +13,11 @@ public:
 	~WhirlpoolForceGenerator() {  }
 	virtual void updateForce(Particle* particle, double t) {
 		if (fabs(particle->inv_mass) < 1e-10) return;
-		inarea = true;
+		iswhirl = true;
 
-		auto x =  -(particle->posit.p.z - poscentro.z);
+		auto x = kf* -(particle->posit.p.z - poscentro.z);
 		auto y = -2 -(particle->posit.p.y - poscentro.y);
-		auto z =  (particle->posit.p.x - poscentro.x);
+		auto z = kf* (particle->posit.p.x - poscentro.x);
 		_windir = Vector3(x, y, z);
 		
 		WindForceGenerator::updateForce(particle, t);

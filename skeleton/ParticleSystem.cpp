@@ -145,15 +145,15 @@ void ParticleSystem::generateFireworkSystem() {
 
 void ParticleSystem::createExplosionForce() {
 	
-	expForceGen = new ExplosionForceGenerator({ 30,100,20 }, 30);
+	expForceGen = new ExplosionForceGenerator({ 30,90,20 }, 30,2);
 }
 
 void ParticleSystem::createwindAreaForce() {
-	wforceGen = new WindForceGenerator({ 0,5,0 }, 0.5, 0);
+	wforceGen = new WindForceGenerator({ 0,-5,0 }, 0.5, 0);
 }
 
-void ParticleSystem::eraseForces() {
-	
-	wforceGen = nullptr;
-	expForceGen = nullptr;
-}
+//void ParticleSystem::eraseForces() {
+//	
+//	wforceGen = nullptr;
+//	expForceGen = nullptr;
+//}

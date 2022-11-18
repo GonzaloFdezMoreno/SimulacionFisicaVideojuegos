@@ -24,19 +24,23 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles() {
 	float vz = rand() % 10;*/
 
 	auto vx = std::normal_distribution<float>{ 1, 5 }; 
-	//auto vy = std::normal_distribution<float>{ 1, 1 };
-	auto vy = 0.0f;
+	auto vy = std::normal_distribution<float>{ 2, 2 };
+	//auto vy = 0.0f;
 	auto vz = std::normal_distribution<float>{1, 1 };
 
 	float negx = rand() % 10 + 1;
 	float negy = rand() % 10 + 1;
 	float negz = rand() % 10 + 1;
 
+
+	float rmass = rand() % 4 + 1;
+	float rtam = rand() % 2 + 1;
+
 	//int tamrnd = rand() % 4 + 1;
 
 
 	//Vector3 velc = { vx(rnd),vy(rnd),vz(rnd) };
-	Vector3 velc = { vx(rnd),vy,vz(rnd) };
+	Vector3 velc = { vx(rnd),vy(rnd),vz(rnd)};
 
 	if (negx < 5) {
 		velc.x = -velc.x;
@@ -48,7 +52,7 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles() {
 		velc.z = -velc.z;
 	}
 
-	Particle* part = new Particle({ rx,100,rz } /* std_dev_pos */,velc, 1, {0,0,0}, {0,0.6,1,1}, 1,1);
+	Particle* part = new Particle({ rx,100,rz } /* std_dev_pos */,velc, 1, {0,0,0}, {0,0.6,1,1}, rtam,rmass);
 	lPart.push_back(part);
 
 
