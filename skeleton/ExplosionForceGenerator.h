@@ -18,7 +18,9 @@ public:
 		float z = (particle->posit.p.z - expArea->posit.p.z) * (particle->posit.p.z - expArea->posit.p.z);
 		
 		Vector3 force = (particle->posit.p - expArea->posit.p)*exp(-t/kon);
-		if (sqrt(x + y + z) < rd) {
+
+		//hacerlo sin sqrt
+		if (x + y + z < rd*rd) {
 			//affected = true;
 			
 			particle->addForce((force * force.normalize()));

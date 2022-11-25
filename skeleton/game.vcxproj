@@ -269,6 +269,7 @@
     <ClCompile Include="UniformParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnchorForceGen.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="ExplosionForceGenerator.h" />
@@ -286,6 +287,7 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="SpringForceGen.h" />
     <ClInclude Include="UniformParticleGenerator.h" />
     <ClInclude Include="WhirlpoolForceGenerator.h" />
     <ClInclude Include="WindForceGenerator.h" />

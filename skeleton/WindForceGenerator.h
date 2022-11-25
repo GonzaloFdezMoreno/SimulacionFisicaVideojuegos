@@ -17,7 +17,8 @@ public:
 		float y = (particle->posit.p.y - area->posit.p.y) * (particle->posit.p.y - area->posit.p.y);
 		float z = (particle->posit.p.z - area->posit.p.z) * (particle->posit.p.z - area->posit.p.z);
 
-		if (sqrt(x + y + z) < 20||iswhirl) {
+		//ponerlo sin sqrt
+		if (x + y + z < 400||iswhirl) {
 
 
 			Vector3 pVel = particle->veloc;

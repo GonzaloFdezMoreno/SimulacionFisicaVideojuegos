@@ -93,6 +93,12 @@
     <ClInclude Include="WhirlpoolForceGenerator.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="SpringForceGen.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="AnchorForceGen.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
