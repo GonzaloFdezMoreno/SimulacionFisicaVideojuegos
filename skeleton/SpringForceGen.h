@@ -12,6 +12,14 @@ public:
 	~SpringForceGen(){}
 
 	virtual void updateForce(Particle* p) {
+		Vector3 force = part->posit.p - p->posit.p;
+
+		const float length = force.normalize();
+		const float deltaX = length - rlen;
+
+		force *= deltaX * _k;
+
+		p->addForce(force);
 
 	}
 

@@ -152,6 +152,10 @@ void ParticleSystem::createwindAreaForce() {
 	wforceGen = new WindForceGenerator({ 0,-5,0 }, 0.5, 0);
 }
 
+void ParticleSystem::generateSpring() {
+
+}
+
 //void ParticleSystem::eraseForces() {
 //	
 //	wforceGen = nullptr;

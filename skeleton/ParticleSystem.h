@@ -37,6 +37,8 @@ public:
 	void createExplosionForce();
 	void createwindAreaForce();
 
+	void generateSpring();
+
 	void eraseForces();
 
 	ParticleGenerator* uPG = nullptr;
