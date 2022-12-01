@@ -228,6 +228,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 		break;
 
+	case 'K':
+		if (!psys->create) {
+			psys->create = true;
+		}
+		break;
 
 	default:
 		break;

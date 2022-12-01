@@ -11,15 +11,17 @@ public:
 	}
 	~SpringForceGen(){}
 
-	virtual void updateForce(Particle* p) {
-		Vector3 force = part->posit.p - p->posit.p;
+	virtual void updateForce(Particle* p,double t) {
+		
+			Vector3 force = part->posit.p - p->posit.p;
 
-		const float length = force.normalize();
-		const float deltaX = length - rlen;
+			const float length = force.normalize();
+			const float deltaX = length - rlen;
 
-		force *= deltaX * _k;
+			force *= deltaX * _k;
 
-		p->addForce(force);
+			p->addForce(force);
+		
 
 	}
 
@@ -29,4 +31,5 @@ protected:
 	double _k;
 	Particle* part;
 	double rlen;
+	bool quieto = false;
 };

@@ -14,6 +14,10 @@
 #include "WindForceGenerator.h"
 #include "ExplosionForceGenerator.h"
 #include "WhirlpoolForceGenerator.h"
+
+
+#include "AnchorForceGen.h"
+#include "SpringForceGen.h"
 #include <string>
 
 using namespace std;
@@ -56,5 +60,7 @@ public:
 	bool getwind = false;
 	bool getexplosion = false;
 	bool getWhirl = false;
+
+	bool create = false;
 
 };

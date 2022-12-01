@@ -38,15 +38,19 @@ void ParticleSystem::update(double t) {
 		
 
 		//std::list<Particle*> pa = uPG->generateParticles();
-		std::list<Particle*> pa = gPG->generateParticles();
+		/*std::list<Particle*> pa = gPG->generateParticles();
 
 		for (auto pl : pa) {
 			_particles.push_back(pl);
 			
-		}
+		}*/
 
 		if (activate) {
 			generateFireworkSystem();
+		}
+
+		if (create) {
+			generateSpring();
 		}
 	//}
 
@@ -153,7 +157,25 @@ void ParticleSystem::createwindAreaForce() {
 }
 
 void ParticleSystem::generateSpring() {
+	//con punto fijo
+	Particle* panch = new Particle({ 50,50,50 }, { 0,-5,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 3, 2);
+	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { 50,70,50 });
+	regfor->addRegistry(anfor, panch);
+	_particles.push_back(panch);
+	create = false;
 
+	//2 moviles
+	Particle* par1 = new Particle({ 20,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 1);
+	Particle* par2 = new Particle({ -10,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 2);
+
+	SpringForceGen* sf1 = new SpringForceGen(3, 20, par2);
+	SpringForceGen* sf2 = new SpringForceGen(3, 20, par1);
+
+	regfor->addRegistry(sf1, par1);
+	regfor->addRegistry(sf2, par2);
+
+	_particles.push_back(par1);
+	_particles.push_back(par2);
 }
 
 //void ParticleSystem::eraseForces() {

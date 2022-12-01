@@ -45,10 +45,11 @@ void Particle::update(double t) {
 
 	timeAlive++;
 	
-	if (timeAlive > 500) {
+	//if (timeAlive > 500) {
+	/*if (timeAlive > 5000) {
 
 		die = true;
-	}
+	}*/
 
 	noForce();
 }
