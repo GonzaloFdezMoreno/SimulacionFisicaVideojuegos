@@ -6,7 +6,7 @@
 class ExplosionForceGenerator : public ForceGenerator {
 public:
 	ExplosionForceGenerator(const Vector3& pos, float rad,double con) : pos_(pos), rd(rad),kon(con) {
-		expArea = new Particle(pos, { 0,0,0 }, 0, { 0,0,0 }, { 0,0,0,0.2 },rd, 0);
+		expArea = new Particle(pos, { 0,0,0 }, 0, { 0,0,0 }, { 0,0,0,0.2 },rd, 0,false);
 		
 	}
 	~ExplosionForceGenerator() { delete expArea; }

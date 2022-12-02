@@ -6,7 +6,7 @@
 class WindForceGenerator : public ForceGenerator {
 public:
 	WindForceGenerator(const Vector3& w,float ka,float kb):_windir(w),k1(ka),k2(kb) {
-		area = new Particle({20,100,20}, {0,0,0}, 0, {0,0,0}, {0,0,0,0.0}, 20, 0);
+		area = new Particle({20,100,20}, {0,0,0}, 0, {0,0,0}, {0,0,0,0.0}, 20, 0,false);
 	}
 	~WindForceGenerator() { delete area; }
 	virtual void updateForce(Particle* particle, double t) {

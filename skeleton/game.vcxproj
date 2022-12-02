@@ -270,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnchorForceGen.h" />
+    <ClInclude Include="BuoyancyForceGen.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="ExplosionForceGenerator.h" />

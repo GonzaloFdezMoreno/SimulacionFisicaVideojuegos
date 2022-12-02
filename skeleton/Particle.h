@@ -7,7 +7,7 @@
 
 class Particle {
 public:
-	Particle(Vector3 pos, Vector3 vel,float dapming,Vector3 accel,Vector4 color,int tam, double mass);
+	Particle(Vector3 pos, Vector3 vel, float dapming, Vector3 accel, Vector4 color, int tam, double mass, bool box);
 	~Particle();
 
 	virtual void update(double t); //es el update
@@ -39,5 +39,6 @@ protected:
 	float timeAlive = 0;
 
 	Vector3 force;
+	bool cubo=false;
 	
 };

@@ -18,6 +18,7 @@
 
 #include "AnchorForceGen.h"
 #include "SpringForceGen.h"
+#include "BuoyancyForceGen.h"
 #include <string>
 
 using namespace std;
@@ -42,6 +43,7 @@ public:
 	void createwindAreaForce();
 
 	void generateSpring();
+	void flota();
 
 	void eraseForces();
 
@@ -62,5 +64,6 @@ public:
 	bool getWhirl = false;
 
 	bool create = false;
+	bool flotar = false;
 
 };

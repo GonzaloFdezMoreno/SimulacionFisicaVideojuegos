@@ -234,6 +234,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		}
 		break;
 
+	case 'M':
+		if (!psys->flotar) {
+			psys->flotar = true;
+		}
+
 	default:
 		break;
 	}

@@ -1,14 +1,18 @@
 #include "Particle.h"
 #include <time.h>
 
-Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate,Vector4 color,int tam,double mass) {
+Particle::Particle(Vector3 pos,Vector3 vel,float damping,Vector3 accelerate,Vector4 color,int tam,double mass,bool box) {
 	veloc = vel;
 	posit = physx::PxTransform(pos.x, pos.y, pos.z);
 	damp = damping;
 	accel = accelerate;
 	masa = mass;
 	inv_mass = 1 / mass;
-	renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(tam)), &posit, color);
+	cubo = box;
+	if(!cubo)
+	    renderItemPart = new RenderItem(CreateShape(physx::PxSphereGeometry(tam)), &posit, color);
+	else
+		renderItemPart = new RenderItem(CreateShape(physx::PxBoxGeometry(tam,tam,tam)), &posit, color);
 	//al principio ninguna fuerza actua
 	force = { 0,0,0 };
 

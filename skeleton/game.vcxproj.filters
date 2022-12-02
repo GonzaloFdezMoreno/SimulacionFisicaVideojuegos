@@ -99,6 +99,9 @@
     <ClInclude Include="AnchorForceGen.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="BuoyancyForceGen.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

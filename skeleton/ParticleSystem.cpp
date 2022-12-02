@@ -52,6 +52,9 @@ void ParticleSystem::update(double t) {
 		if (create) {
 			generateSpring();
 		}
+		if (flotar) {
+			flota();
+		}
 	//}
 
 		regfor->updateForces(t);
@@ -158,15 +161,15 @@ void ParticleSystem::createwindAreaForce() {
 
 void ParticleSystem::generateSpring() {
 	//con punto fijo
-	Particle* panch = new Particle({ 50,50,50 }, { 0,-5,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 3, 2);
+	Particle* panch = new Particle({ 50,50,50 }, { 0,-5,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 3, 2,false);
 	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { 50,70,50 });
 	regfor->addRegistry(anfor, panch);
 	_particles.push_back(panch);
 	create = false;
 
 	//2 moviles
-	Particle* par1 = new Particle({ 20,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 1);
-	Particle* par2 = new Particle({ -10,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 2);
+	Particle* par1 = new Particle({ 20,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 1,false);
+	Particle* par2 = new Particle({ -10,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 2,false);
 
 	SpringForceGen* sf1 = new SpringForceGen(3, 20, par2);
 	SpringForceGen* sf2 = new SpringForceGen(3, 20, par1);
@@ -176,6 +179,14 @@ void ParticleSystem::generateSpring() {
 
 	_particles.push_back(par1);
 	_particles.push_back(par2);
+}
+
+void ParticleSystem::flota() {
+	Particle* paflo = new Particle({ 70,0,-70 }, { 0,0,0 }, 0.9, { 0,-2,0 }, { 0,1,1,1 }, 5, 2, false);
+	BuoyancyForceGen* flofor = new BuoyancyForceGen(5,0.1,10);
+	regfor->addRegistry(flofor, paflo);
+	_particles.push_back(paflo);
+	flotar = false;
 }
 
 //void ParticleSystem::eraseForces() {

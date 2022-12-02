@@ -52,7 +52,7 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles() {
 		velc.z = -velc.z;
 	}
 
-	Particle* part = new Particle({ rx,100,rz } /* std_dev_pos */,velc, 1, {0,0,0}, {0,0.6,1,1}, rtam,rmass);
+	Particle* part = new Particle({ rx,100,rz } /* std_dev_pos */,velc, 1, {0,0,0}, {0,0.6,1,1}, rtam,rmass,false);
 	lPart.push_back(part);
 
 
