@@ -25,3 +25,24 @@ std::list<Particle*> UniformParticleGenerator::generateParticles() {
 
 	return lPart;
 }
+
+std::list<physx::PxRigidDynamic*> UniformParticleGenerator::generateObjects(physx::PxPhysics* phy, physx::PxScene* scene) {
+	//Crear lista nueva desde aqui
+	std::list<physx::PxRigidDynamic*> lobj;
+	float rx = rand() % 50;
+	//float ry = rand() % 50;
+	float rz = rand() % 50;
+
+	physx::PxRigidDynamic* obj = phy->createRigidDynamic(physx::PxTransform({ rx,50,rz }));
+	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(5));
+	obj->attachShape(*shape);
+	RenderItem* item = new RenderItem(shape, obj, { 0.5,0.8,1,1 });
+	scene->addActor(*obj);;
+	lobj.push_back(obj);
+
+
+
+	return lobj;
+}
+
+

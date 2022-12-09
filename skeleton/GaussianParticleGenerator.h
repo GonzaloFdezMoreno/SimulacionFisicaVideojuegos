@@ -17,4 +17,5 @@ public:
 	GaussianParticleGenerator(Vector3 std_dev_pos,Vector3 std_dev_vel);
 	~GaussianParticleGenerator();
 	std::list<Particle*> generateParticles() override;
+	std::list<physx::PxRigidDynamic*> generateObjects(physx::PxPhysics* phy, physx::PxScene* scene) override;
 };

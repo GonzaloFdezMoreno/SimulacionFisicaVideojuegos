@@ -17,4 +17,6 @@ public:
 	~UniformParticleGenerator();
 	void update(double t);
 	std::list<Particle*> generateParticles() override;
+	std::list<physx::PxRigidDynamic*> generateObjects(physx::PxPhysics* phy, physx::PxScene* scene) override;
+
 };

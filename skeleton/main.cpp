@@ -15,6 +15,8 @@
 #include "ParticleSystem.h"
 #include "Firework.h"
 
+#include "WorldManager.h"
+
 
 
 
@@ -42,6 +44,9 @@ ParticleSystem* psys = NULL;
 //Firework* fwo = NULL;
 std::vector<Firework*> fwoVec;
 
+RenderItem* item = NULL;
+
+WorldManager* wmg = NULL;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -69,10 +74,25 @@ void initPhysics(bool interactive)
 
 	//Añadir elementos
 	//partic = new Particle({ 0,50,0 },{ -10,20,0 }, 0.9, {0,-9.8,0});
-	plan = new Plane({ 0,-100,0 }, { 0,1,0,1 });
+	//plan = new Plane({ 0,-100,0 }, { 0,1,0,1 });
 
-	psys = new ParticleSystem(2);
+	//psys = new ParticleSystem(2);
 
+	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform({ 0,0,0 }));
+	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 100));
+	suelo->attachShape(*shape);
+	item = new RenderItem(shape, suelo, { 0.5,0.8,1,1 });
+	gScene->addActor(*suelo);
+
+
+	PxRigidStatic* wall = gPhysics->createRigidStatic(PxTransform({ 10,10,-30}));
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	PxShape* shapeWall = CreateShape(PxBoxGeometry(40, 20, 5));
+	wall->attachShape(*shapeWall);
+	item = new RenderItem(shapeWall, wall, { 0.8,0.8,0.8,1 });
+	gScene->addActor(*wall);
+
+	wmg = new WorldManager(10, gPhysics, gScene);
 	
 	}
 
@@ -93,6 +113,8 @@ void stepPhysics(bool interactive, double t)
 
 	if(psys!=NULL)
 	psys->update(t);
+
+	wmg->update(t);
 
 	//mejor crear el generador de fuegos
 	

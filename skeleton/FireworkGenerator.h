@@ -20,7 +20,7 @@ public:
 	//std::list<Firework*> generateParticles(); 
 	std::list<Particle*> generateParticles() override; 
 
-	
+	std::list<physx::PxRigidDynamic*> generateObjects(physx::PxPhysics* phy, physx::PxScene* scene) override;
 
 
 };

@@ -37,6 +37,9 @@
     <ClCompile Include="FireworkGenerator.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="WorldManager.cpp">
+      <Filter>RigidBody</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -102,6 +105,9 @@
     <ClInclude Include="BuoyancyForceGen.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="WorldManager.h">
+      <Filter>RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -109,6 +115,9 @@
     </Filter>
     <Filter Include="Particle">
       <UniqueIdentifier>{767c0a07-b51e-4b2c-a58b-c3a5d25cbda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RigidBody">
+      <UniqueIdentifier>{3278e390-ac16-4b08-a36d-bce028658652}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
