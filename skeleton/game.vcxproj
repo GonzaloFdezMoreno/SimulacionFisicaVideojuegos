@@ -280,6 +280,7 @@
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GaussianParticleGenerator.h" />
     <ClInclude Include="GravityForceGenerator.h" />
+    <ClInclude Include="ObjectForceRegistry.h" />
     <ClInclude Include="WorldManager.h" />
     <ClInclude Include="Mshot.h" />
     <ClInclude Include="Particle.h" />

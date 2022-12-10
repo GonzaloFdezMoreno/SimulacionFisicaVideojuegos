@@ -24,6 +24,20 @@ public:
 
 	}
 
+	virtual void updateObjectForce(physx::PxRigidDynamic* obj, double t) {
+		if (fabs(obj->getInvMass()) < 1e-10)
+			return;
+		iswhirl = true;
+
+		auto x = kf * -(obj->getGlobalPose().p.z - poscentro.z);
+		auto y = -2 - (obj->getGlobalPose().p.y - poscentro.y);
+		auto z = kf * (obj->getGlobalPose().p.x - poscentro.x);
+		_windir = Vector3(x, y, z);
+
+		WindForceGenerator::updateObjectForce(obj, t);
+
+	}
+
 
 protected:
 	

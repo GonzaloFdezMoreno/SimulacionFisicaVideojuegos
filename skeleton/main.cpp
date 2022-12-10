@@ -168,6 +168,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//bullets.push_back(new Mshot(1, { GetCamera()->getDir() * 100 }, {GetCamera()->getEye() }, 0.9, { 0,0.5,0 },{0.8,0.4,0,1},5));
 
 		//fuegos artificiales
+		if(psys!=NULL)
 		psys->activate = true;
 		break;
 	}
@@ -204,61 +205,83 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 
 	case 'G':
-		if (!psys->getgrav) {
-			psys->getgrav = true;
+		//if (!psys->getgrav) {
+		if (!wmg->getgrav) {
+			//psys->getgrav = true;
+			wmg->getgrav = true;
 		}
 		
 		break;
 	case 'T':
-		if (!psys->getwind) {
-			psys->getwind = true;
-			psys->createwindAreaForce();
+		//if (!psys->getwind) {
+		if (!wmg->getwind) {
+			//psys->getwind = true;
+			wmg->getwind = true;
+			//psys->createwindAreaForce();
+			wmg->createwindAreaForce();
 		}
 		
 		break;
 	
 	case 'U':
-		if (!psys->getexplosion) {
-			psys->getexplosion = true;
-			psys->createExplosionForce();
+		//if (!psys->getexplosion) {
+		if (!wmg->getexplosion) {
+			//psys->getexplosion = true;
+			wmg->getexplosion = true;
+			//psys->createExplosionForce();
+			wmg->createExplosionForce();
 		}
 		
 		break;
 	
 	case 'H':
-		if (!psys->getWhirl) {
-			psys->getWhirl = true;
+		//if (!psys->getWhirl) {
+		if (!wmg->getWhirl) {
+			//psys->getWhirl = true;
+			wmg->getWhirl = true;
 			
 		}
 		
 		break;
 	case 'X':
 		//desactivar
-		if (psys->getgrav) {
-			psys->getgrav = false;
+		//if (psys->getgrav) {
+		if (wmg->getgrav) {
+			//psys->getgrav = false;
+			wmg->getgrav = false;
 		}
-		if (psys->getwind) {
-			psys->getwind = false;
+		//if (psys->getwind) {
+		if (wmg->getwind) {
+			//psys->getwind = false;
+			wmg->getwind = false;
 		}
-		if (psys->getexplosion) {
-			psys->getexplosion = false;
+		//if (psys->getexplosion) {
+		if (wmg->getexplosion) {
+			//psys->getexplosion = false;
+			wmg->getexplosion = false;
 		}
-		if (psys->getWhirl) {
-			psys->getWhirl = false;
+		//if (psys->getWhirl) {
+		if (wmg->getWhirl) {
+			//psys->getWhirl = false;
+			wmg->getWhirl = false;
 		}
 		//psys->eraseForces();
 
 		break;
 
 	case 'K':
-		if (!psys->create) {
-			psys->create = true;
+		if (psys != NULL) {
+			if (!psys->create) {
+				psys->create = true;
+			}
 		}
 		break;
 
 	case 'M':
-		if (!psys->flotar) {
-			psys->flotar = true;
+		if (psys != NULL) {
+			if (!psys->flotar) {
+				psys->flotar = true;
+			}
 		}
 
 	default:

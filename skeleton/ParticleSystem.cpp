@@ -156,7 +156,7 @@ void ParticleSystem::createExplosionForce() {
 }
 
 void ParticleSystem::createwindAreaForce() {
-	wforceGen = new WindForceGenerator({ 0,-5,0 }, 0.5, 0);
+	wforceGen = new WindForceGenerator({ 5,0,5 }, 0.5, 0);
 }
 
 void ParticleSystem::generateSpring() {

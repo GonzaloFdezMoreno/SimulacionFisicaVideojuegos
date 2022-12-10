@@ -34,7 +34,25 @@ public:
 		p->addForce(fl);
 	}
 
-	
+	virtual void updateObjectForce(physx::PxRigidDynamic* obj, double t) {
+
+		float h = obj->getGlobalPose().p.y;
+		float h0 = parliq->posit.p.y;
+
+		Vector3 fl(0, 0, 0);
+		float in = 0.0f;
+		if (h - h0 > _height * 0.5) {
+			in = 0.0f;
+		}
+		else if (h - h0 > _height * 0.5) {
+			in = 1.0f;
+		}
+		else {
+			in = (h0 - h) / _height + 0.5;
+		}
+		fl.y = _liquid * _volume * in * 9.8;
+		obj->addForce(fl);
+	}
 
 protected:
 	float _height;

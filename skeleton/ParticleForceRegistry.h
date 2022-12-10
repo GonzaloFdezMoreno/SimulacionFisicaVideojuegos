@@ -18,6 +18,8 @@ public:
 		}
 	}
 
+	
+
 	void addRegistry(ForceGenerator* fg,Particle* p){
 		
 		insert({ fg, p });

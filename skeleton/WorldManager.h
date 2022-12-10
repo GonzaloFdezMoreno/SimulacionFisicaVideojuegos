@@ -6,6 +6,7 @@
 
 #include "ParticleGenerator.h"
 #include "UniformParticleGenerator.h"
+#include "ObjectForceRegistry.h"
 
 class WorldManager {
 public:
@@ -14,6 +15,14 @@ public:
 	void update(double t);
 	ParticleGenerator* getParticleGenerator(string nombre);
 	
+	bool getgrav = false;
+	bool getwind = false;
+	bool getexplosion = false;
+	bool getWhirl = false;
+
+	void createExplosionForce();
+	void createwindAreaForce();
+
 
 protected:
 
@@ -26,5 +35,10 @@ protected:
 	int nob;
 	
 	ParticleGenerator* uPG = nullptr;
+	ObjectForceRegistry* regforobj;
 
+	GravityForceGenerator* gforceGen = nullptr;
+	WindForceGenerator* wforceGen = nullptr;
+	ExplosionForceGenerator* expForceGen = nullptr;
+	WhirlpoolForceGenerator* whForceGen = nullptr;
 };

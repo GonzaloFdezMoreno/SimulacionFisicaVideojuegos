@@ -22,6 +22,17 @@ public:
 		particle->addForce(_gravity*particle->masa);
 		
 	}
+	virtual void updateObjectForce(physx::PxRigidDynamic* obj, double t) {
+		if (fabs(obj->getInvMass()) < 1e-10)
+			return;
+
+		
+		auto a = obj->getMass();
+		
+		obj->addForce(_gravity * a);
+
+	}
+
 	//inline void setGravity(Vector3 g) { _gravity = g; }
 	
 protected:

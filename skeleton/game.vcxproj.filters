@@ -108,6 +108,9 @@
     <ClInclude Include="WorldManager.h">
       <Filter>RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectForceRegistry.h">
+      <Filter>RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

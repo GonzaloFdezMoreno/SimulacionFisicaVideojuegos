@@ -7,6 +7,7 @@ class ExplosionForceGenerator : public ForceGenerator {
 public:
 	ExplosionForceGenerator(const Vector3& pos, float rad,double con) : pos_(pos), rd(rad),kon(con) {
 		expArea = new Particle(pos, { 0,0,0 }, 0, { 0,0,0 }, { 0,0,0,0.2 },rd, 0,false);
+		expArea = new Particle(pos, { 0,0,0 }, 0, { 0,0,0 }, { 0,0,0,0.2 },rd, 0,false);
 		
 	}
 	~ExplosionForceGenerator() { delete expArea; }
@@ -26,6 +27,7 @@ public:
 			particle->addForce((force * force.normalize()));
 		}
 		
+
 		//la vuelta
 	/*	if(affected&& sqrt(x + y + z) > rd) {
 			
@@ -33,6 +35,23 @@ public:
 		}*/
 
 		
+	}
+
+	virtual void updateObjectForce(physx::PxRigidDynamic* obj, double t) {
+		if (fabs(obj->getInvMass()) < 1e-10)
+			return;
+		float x = (obj->getGlobalPose().p.x - expArea->posit.p.x) * (obj->getGlobalPose().p.x - expArea->posit.p.x);
+		float y = (obj->getGlobalPose().p.y - expArea->posit.p.y) * (obj->getGlobalPose().p.y - expArea->posit.p.y);
+		float z = (obj->getGlobalPose().p.z - expArea->posit.p.z) * (obj->getGlobalPose().p.z - expArea->posit.p.z);
+
+		Vector3 force = (obj->getGlobalPose().p - expArea->posit.p) * exp(-t / kon);
+
+		//hacerlo sin sqrt
+		if (x + y + z < rd * rd) {
+			//affected = true;
+
+			obj->addForce((force * force.normalize()));
+		}
 	}
 
 

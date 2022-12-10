@@ -25,6 +25,20 @@ public:
 
 	}
 
+	virtual void updateObjectForce(physx::PxRigidDynamic* obj, double t) {
+
+		Vector3 force = part->posit.p - obj->getGlobalPose().p;
+
+		const float length = force.normalize();
+		const float deltaX = length - rlen;
+
+		force *= deltaX * _k;
+
+		obj->addForce(force);
+
+
+	}
+
 	inline void setK(double k) { _k = k; }
 
 protected:
