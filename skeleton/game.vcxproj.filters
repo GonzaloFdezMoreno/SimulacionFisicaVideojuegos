@@ -111,6 +111,9 @@
     <ClInclude Include="ObjectForceRegistry.h">
       <Filter>RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

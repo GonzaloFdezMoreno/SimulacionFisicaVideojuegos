@@ -61,16 +61,22 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles() {
 }
 
 std::list<physx::PxRigidDynamic*> GaussianParticleGenerator::generateObjects(physx::PxPhysics* phy, physx::PxScene* scene) {
+	//std::list<RigidBody*> lobj;
 	std::list<physx::PxRigidDynamic*> lobj;
 	float rx = rand() % 50;
 	//float ry = rand() % 50;
 	float rz = rand() % 50;
 
+	//RigidBody* obj = new RigidBody(phy, scene, { rx,50,rz }, physx::PxSphereGeometry(5));
+	//RigidBody* object = new RigidBody(phy->createRigidDynamic(physx::PxTransform({ rx,50,rz })), { rx,50,rz }, physx::PxSphereGeometry(5));
+	
 	physx::PxRigidDynamic* obj = phy->createRigidDynamic(physx::PxTransform({ rx,50,rz }));
-	physx::PxShape* shape = CreateShape(physx::PxBoxGeometry(100, 0.1, 100));
+	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(5));
 	obj->attachShape(*shape);
 	RenderItem* item = new RenderItem(shape, obj, { 0.5,0.8,1,1 });
-	scene->addActor(*obj);;
+
+	scene->addActor(*obj);
+	//scene->addActor(*object->obj);
 	lobj.push_back(obj);
 
 

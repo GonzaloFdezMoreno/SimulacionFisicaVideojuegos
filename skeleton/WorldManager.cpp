@@ -25,28 +25,52 @@ void WorldManager::update(double t) {
 	for (auto ob = _objects.begin(); ob != _objects.end();) {
 
 		if (getgrav) {
-			regforobj->addRegistry(gforceGen, (*ob));
+			regforobj->addRegistry(gforceGen, (*ob)->obj);
 		}
 		if (getwind) {
 			if (wforceGen != nullptr)
-				regforobj->addRegistry(wforceGen, (*ob));
+				regforobj->addRegistry(wforceGen, (*ob)->obj);
 		}
 		if (getexplosion) {
 			if (expForceGen != nullptr)
-				regforobj->addRegistry(expForceGen, (*ob));
+				regforobj->addRegistry(expForceGen, (*ob)->obj);
 		}
 		if (getWhirl) {
-			regforobj->addRegistry(whForceGen, (*ob));
+			regforobj->addRegistry(whForceGen, (*ob)->obj);
 		}
-		ob++;
+		
+		if ((*ob)->inTime()) {
+			(*ob)->addTime();
+			ob++;
+		}
+		else {
+			regforobj->deleteParticleRegistry((*ob)->obj);
+			delete* ob;
+			ob = _objects.erase(ob);
+		}
+
+		
 	}
 
 	if (_objects.size() < nob) {
-
-		std::list<physx::PxRigidDynamic*> odyn = uPG->generateObjects(phy, scene);
-		for (auto pl : odyn) {
-			_objects.push_back(pl);
-
+		if (create) {
+			std::list<physx::PxRigidDynamic*> odyn = uPG->generateObjects(phy, scene);
+			//std::list<RigidBody*> odyn = uPG->generateObjects(phy, scene);
+			for (auto pl : odyn) {
+				//_rigidobjects.push_back(pl);
+				_objects.push_back(new RigidBody(pl));
+				scene->addActor((*pl));
+			}
+			create = false;
+		}
+		else {
+			if (delay < 500) {
+				delay++;
+			}
+			else {
+				delay = 0;
+				create = true;
+			}
 		}
 	}
 	

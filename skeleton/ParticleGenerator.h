@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "Particle.h"
+#include "RigidBody.h"
 #include <list>
 
 class ParticleGenerator {

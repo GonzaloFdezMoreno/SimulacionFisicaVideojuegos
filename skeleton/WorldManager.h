@@ -7,6 +7,7 @@
 #include "ParticleGenerator.h"
 #include "UniformParticleGenerator.h"
 #include "ObjectForceRegistry.h"
+#include "RigidBody.h"
 
 class WorldManager {
 public:
@@ -28,7 +29,8 @@ protected:
 
 	physx::PxPhysics* phy = NULL;
 	physx::PxScene* scene = NULL;
-	std::list<physx::PxRigidDynamic*> _objects;
+	std::list<RigidBody*> _objects;
+	std::list<physx::PxRigidDynamic*> _rigidobjects;
 	
 	std::list<ParticleGenerator*> _particles_generators;
 	Vector3 gravity;
@@ -41,4 +43,7 @@ protected:
 	WindForceGenerator* wforceGen = nullptr;
 	ExplosionForceGenerator* expForceGen = nullptr;
 	WhirlpoolForceGenerator* whForceGen = nullptr;
+
+	float delay = 0;
+	bool create = true;
 };

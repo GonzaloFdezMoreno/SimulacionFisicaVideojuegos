@@ -34,13 +34,13 @@ std::list<physx::PxRigidDynamic*> UniformParticleGenerator::generateObjects(phys
 	float rz = rand() % 50;
 
 	physx::PxRigidDynamic* obj = phy->createRigidDynamic(physx::PxTransform({ rx,50,rz }));
-	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(5));
-	obj->attachShape(*shape);
-	RenderItem* item = new RenderItem(shape, obj, { 0.5,0.8,1,1 });
-	scene->addActor(*obj);;
+	//physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(5));
+	//obj->attachShape(*shape);
+	//RenderItem* item = new RenderItem(shape, obj, { 0.5,0.8,1,1 });
+	//scene->addActor(*obj);;
 	lobj.push_back(obj);
 
-
+	
 
 	return lobj;
 }
