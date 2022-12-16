@@ -8,6 +8,8 @@
 #include "UniformParticleGenerator.h"
 #include "ObjectForceRegistry.h"
 #include "RigidBody.h"
+#include <random>
+#include <list>
 
 class WorldManager {
 public:
@@ -26,7 +28,7 @@ public:
 
 
 protected:
-
+	std::mt19937 rnd;
 	physx::PxPhysics* phy = NULL;
 	physx::PxScene* scene = NULL;
 	std::list<RigidBody*> _objects;

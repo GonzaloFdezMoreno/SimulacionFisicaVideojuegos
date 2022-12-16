@@ -44,7 +44,7 @@ public:
 		float z = (obj->getGlobalPose().p.z - area->posit.p.z) * (obj->getGlobalPose().p.z - area->posit.p.z);
 		
 		//ponerlo sin sqrt
-		if (x + y + z < 400 || iswhirl) {
+		if (x + y + z < 10000 || iswhirl) {
 
 
 			Vector3 pVel = obj->getLinearVelocity();

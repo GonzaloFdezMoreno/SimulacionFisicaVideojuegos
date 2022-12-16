@@ -21,8 +21,6 @@ std::list<Particle*> UniformParticleGenerator::generateParticles() {
 	Particle* part = new Particle({rx,60,30}, { 5,10,-10 }, 1, { 0,-7,0 }, { 0,0.6,1,1 }, 1,0,false);
 	lPart.push_back(part);
 	
-
-
 	return lPart;
 }
 

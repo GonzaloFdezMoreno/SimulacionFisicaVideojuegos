@@ -182,8 +182,8 @@ void ParticleSystem::generateSpring() {
 }
 
 void ParticleSystem::flota() {
-	Particle* paflo = new Particle({ 70,0,-70 }, { 0,0,0 }, 0.9, { 0,-2,0 }, { 0,1,1,1 }, 5, 2, false);
-	BuoyancyForceGen* flofor = new BuoyancyForceGen(5,0.1,10);
+	Particle* paflo = new Particle({ 70,0,-70 }, { 0,0,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 5, 5, false);
+	BuoyancyForceGen* flofor = new BuoyancyForceGen(5,3,10);
 	regfor->addRegistry(flofor, paflo);
 	_particles.push_back(paflo);
 	flotar = false;

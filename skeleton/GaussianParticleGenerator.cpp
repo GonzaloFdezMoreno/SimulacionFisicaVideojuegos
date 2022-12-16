@@ -63,14 +63,15 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles() {
 std::list<physx::PxRigidDynamic*> GaussianParticleGenerator::generateObjects(physx::PxPhysics* phy, physx::PxScene* scene) {
 	//std::list<RigidBody*> lobj;
 	std::list<physx::PxRigidDynamic*> lobj;
-	float rx = rand() % 50;
-	//float ry = rand() % 50;
-	float rz = rand() % 50;
-
+	auto vx = std::normal_distribution<float>{ 1, 5 };
+	auto vy = std::normal_distribution<float>{ 2, 2 };
+	//auto vy = 0.0f;
+	auto vz = std::normal_distribution<float>{ 1, 1 };
+	Vector3 velc = { vx(rnd),vy(rnd),vz(rnd) };
 	//RigidBody* obj = new RigidBody(phy, scene, { rx,50,rz }, physx::PxSphereGeometry(5));
 	//RigidBody* object = new RigidBody(phy->createRigidDynamic(physx::PxTransform({ rx,50,rz })), { rx,50,rz }, physx::PxSphereGeometry(5));
 	
-	physx::PxRigidDynamic* obj = phy->createRigidDynamic(physx::PxTransform({ rx,50,rz }));
+	physx::PxRigidDynamic* obj = phy->createRigidDynamic(physx::PxTransform(velc));
 	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(5));
 	obj->attachShape(*shape);
 	RenderItem* item = new RenderItem(shape, obj, { 0.5,0.8,1,1 });

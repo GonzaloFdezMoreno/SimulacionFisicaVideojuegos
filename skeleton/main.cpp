@@ -76,7 +76,7 @@ void initPhysics(bool interactive)
 	//partic = new Particle({ 0,50,0 },{ -10,20,0 }, 0.9, {0,-9.8,0});
 	//plan = new Plane({ 0,-100,0 }, { 0,1,0,1 });
 
-	//psys = new ParticleSystem(2);
+	psys = new ParticleSystem(2);
 
 	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform({ 0,0,0 }));
 	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 100));
