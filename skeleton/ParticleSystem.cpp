@@ -2,8 +2,8 @@
 
 ParticleSystem::ParticleSystem(int npart) {
 
-	/*uPG = new UniformParticleGenerator({2,2,0}, {1,2,1});
-	_particles_generators.push_back(uPG);*/
+	uPG = new UniformParticleGenerator({2,2,0}, {1,2,1});
+	_particles_generators.push_back(uPG);
 
 	fireworkSysGen = new FireworkGenerator({ 0,20,0 }, { 0,100,0 });
 	//_particles_generators.push_back(fireworkSysGen);
@@ -37,13 +37,13 @@ void ParticleSystem::update(double t) {
 	
 		
 
-		//std::list<Particle*> pa = uPG->generateParticles();
-		/*std::list<Particle*> pa = gPG->generateParticles();
+		std::list<Particle*> pa = uPG->generateParticles();
+		//std::list<Particle*> pa = gPG->generateParticles();
 
 		for (auto pl : pa) {
 			_particles.push_back(pl);
 			
-		}*/
+		}
 
 		if (activate) {
 			generateFireworkSystem();
@@ -161,15 +161,15 @@ void ParticleSystem::createwindAreaForce() {
 
 void ParticleSystem::generateSpring() {
 	//con punto fijo
-	Particle* panch = new Particle({ 50,50,50 }, { 0,-5,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 3, 2,false);
+	Particle* panch = new Particle({ 50,50,50 }, { 0,-5,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 3, 2,false,0);
 	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { 50,70,50 });
 	regfor->addRegistry(anfor, panch);
 	_particles.push_back(panch);
 	create = false;
 
 	//2 moviles
-	Particle* par1 = new Particle({ 20,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 1,false);
-	Particle* par2 = new Particle({ -10,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 2,false);
+	Particle* par1 = new Particle({ 20,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 1,false,0);
+	Particle* par2 = new Particle({ -10,50,20 }, { 0,0,0 }, 0.9, { 0,0,0 }, { 0,1,1,1 }, 3, 2,false,0);
 
 	SpringForceGen* sf1 = new SpringForceGen(3, 20, par2);
 	SpringForceGen* sf2 = new SpringForceGen(3, 20, par1);
@@ -182,7 +182,7 @@ void ParticleSystem::generateSpring() {
 }
 
 void ParticleSystem::flota() {
-	Particle* paflo = new Particle({ 70,0,-70 }, { 0,0,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 5, 5, false);
+	Particle* paflo = new Particle({ 70,0,-70 }, { 0,0,0 }, 0.9, { 0,-9.8,0 }, { 0,1,1,1 }, 5, 5, false,0);
 	BuoyancyForceGen* flofor = new BuoyancyForceGen(5,3,10);
 	regfor->addRegistry(flofor, paflo);
 	_particles.push_back(paflo);

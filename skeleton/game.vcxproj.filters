@@ -40,6 +40,9 @@
     <ClCompile Include="WorldManager.cpp">
       <Filter>RigidBody</Filter>
     </ClCompile>
+    <ClCompile Include="PAgua.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -113,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="PAgua.h">
+      <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

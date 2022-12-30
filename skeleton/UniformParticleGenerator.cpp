@@ -18,7 +18,7 @@ std::list<Particle*> UniformParticleGenerator::generateParticles() {
 	//float ry = rand() % 50;
 	float rz = rand() % 50;
 
-	Particle* part = new Particle({rx,60,30}, { 5,10,-10 }, 1, { 0,-7,0 }, { 0,0.6,1,1 }, 1,0,false);
+	PAgua* part = new PAgua({rx,60,30}, { 5,10,-10 }, 1, { 0,-7,0 }, { 0,0.6,1,1 }, 1);
 	lPart.push_back(part);
 	
 	return lPart;

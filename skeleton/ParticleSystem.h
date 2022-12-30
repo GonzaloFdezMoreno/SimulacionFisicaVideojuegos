@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Particle.h"
 #include "Firework.h"
+#include "PAgua.h"
 #include "ParticleGenerator.h"
 #include "UniformParticleGenerator.h"
 #include "GaussianParticleGenerator.h"

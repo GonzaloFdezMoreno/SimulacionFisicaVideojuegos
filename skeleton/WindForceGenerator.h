@@ -7,7 +7,7 @@ class WindForceGenerator : public ForceGenerator {
 public:
 	WindForceGenerator(const Vector3& w,float ka,float kb):_windir(w),k1(ka),k2(kb) {
 		rd = 100;
-		area = new Particle({0,0,0}, {0,0,0}, 0, {0,0,0}, {0,0,0,0.0}, rd, 0,false);
+		area = new Particle({0,0,0}, {0,0,0}, 0, {0,0,0}, {0,0,0,0.0}, rd, 0,false,0);
 	}
 	~WindForceGenerator() { delete area; }
 	virtual void updateForce(Particle* particle, double t) {
@@ -46,7 +46,7 @@ public:
 		//ponerlo sin sqrt
 		if (x + y + z < 10000 || iswhirl) {
 
-
+			
 			Vector3 pVel = obj->getLinearVelocity();
 			Vector3 resVel = pVel - _windir;
 

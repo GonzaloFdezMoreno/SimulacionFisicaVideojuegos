@@ -259,6 +259,7 @@
     <ClCompile Include="GaussianParticleGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mshot.cpp" />
+    <ClCompile Include="PAgua.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="GaussianParticleGenerator.h" />
     <ClInclude Include="GravityForceGenerator.h" />
     <ClInclude Include="ObjectForceRegistry.h" />
+    <ClInclude Include="PAgua.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="WorldManager.h" />
     <ClInclude Include="Mshot.h" />

@@ -52,31 +52,31 @@ void WorldManager::update(double t) {
 		
 	}
 
-	if (_objects.size() < nob) {
-		//if (create) {
-			std::list<physx::PxRigidDynamic*> odyn = uPG->generateObjects(phy, scene);
-			//std::list<RigidBody*> odyn = uPG->generateObjects(phy, scene);
-			for (auto pl : odyn) {
-				//_rigidobjects.push_back(pl);
-				auto rr = std::normal_distribution<float>{ 1, 1 };
-				auto rg = std::normal_distribution<float>{ 1, 1 };
-				auto rb = std::normal_distribution<float>{ 1, 1 };
-				auto rf = std::normal_distribution<float>{ 1, 1 };
-				_objects.push_back(new RigidBody(pl, {rr(rnd),rg(rnd),rb(rnd),1}, rf(rnd)));
-				scene->addActor((*pl));
-			}
-			//create = false;
-		/*}
-		else {
-			if (delay < 200) {
-				delay++;
-			}
-			else {
-				delay = 0;
-				create = true;
-			}
-		}*/
-	}
+	//if (_objects.size() < nob) {
+	//	//if (create) {
+	//		std::list<physx::PxRigidDynamic*> odyn = uPG->generateObjects(phy, scene);
+	//		//std::list<RigidBody*> odyn = uPG->generateObjects(phy, scene);
+	//		for (auto pl : odyn) {
+	//			//_rigidobjects.push_back(pl);
+	//			auto rr = std::normal_distribution<float>{ 1, 1 };
+	//			auto rg = std::normal_distribution<float>{ 1, 1 };
+	//			auto rb = std::normal_distribution<float>{ 1, 1 };
+	//			auto rf = std::normal_distribution<float>{ 1, 1 };
+	//			_objects.push_back(new RigidBody(pl, {rr(rnd),rg(rnd),rb(rnd),1}, rf(rnd)));
+	//			scene->addActor((*pl));
+	//		}
+	//		//create = false;
+	//	/*}
+	//	else {
+	//		if (delay < 200) {
+	//			delay++;
+	//		}
+	//		else {
+	//			delay = 0;
+	//			create = true;
+	//		}
+	//	}*/
+	//}
 	
 }
 

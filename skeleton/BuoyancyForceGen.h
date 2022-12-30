@@ -10,7 +10,7 @@ public:
 		_volume = v;
 		_liquid = den;
 
-		parliq = new Particle({70,20,-70}, {0,0,0}, 1, {0,0,0}, {1,0,0,0.5}, _height, 0, true);
+		parliq = new Particle({70,20,-70}, {0,0,0}, 1, {0,0,0}, {1,0,0,0.5}, _height, 0, true,0);
 	}
 	~BuoyancyForceGen() {}
 

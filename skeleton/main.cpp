@@ -38,7 +38,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 Particle* partic = NULL;
-std::vector<Mshot*> bullets ;
+std::vector<RigidBody*> bullets ;
 Plane* plan = NULL;
 ParticleSystem* psys = NULL;
 //Firework* fwo = NULL;
@@ -85,13 +85,41 @@ void initPhysics(bool interactive)
 	gScene->addActor(*suelo);
 
 
-	PxRigidStatic* wall = gPhysics->createRigidStatic(PxTransform({ 10,10,-30}));
+	PxRigidStatic* outer = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	PxShape* shapeWall = CreateShape(PxBoxGeometry(40, 20, 5));
-	wall->attachShape(*shapeWall);
-	item = new RenderItem(shapeWall, wall, { 0.8,0.8,0.8,1 });
-	gScene->addActor(*wall);
-
+	PxShape* shapeOuter = CreateShape(PxBoxGeometry(20, 20, 0.2));
+	outer->attachShape(*shapeOuter);
+	item = new RenderItem(shapeOuter, outer, { 0,0.5,0.5,1 });
+	gScene->addActor(*outer);
+	
+	PxRigidStatic* midA = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	PxShape* shapeMidA = CreateShape(PxBoxGeometry(15, 15, 0.25));
+	midA->attachShape(*shapeMidA);
+	item = new RenderItem(shapeMidA, midA, { 0,0,0.8,1 });
+	gScene->addActor(*midA);
+	
+	PxRigidStatic* midB = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	PxShape* shapeMidB = CreateShape(PxBoxGeometry(10, 10, 0.3));
+	midB->attachShape(*shapeMidB);
+	item = new RenderItem(shapeMidB, midB, { 0,0.8,0,1 });
+	gScene->addActor(*midB);
+	
+	PxRigidStatic* midC = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	PxShape* shapeMidC = CreateShape(PxBoxGeometry(5, 5, 0.35));
+	midC->attachShape(*shapeMidC);
+	item = new RenderItem(shapeMidC, midC, { 0.8,0.8,0,1 });
+	gScene->addActor(*midC);
+	
+	PxRigidStatic* center = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	PxShape* shapeCenter = CreateShape(PxBoxGeometry(2, 2, 0.4));
+	center->attachShape(*shapeCenter);
+	item = new RenderItem(shapeCenter, center, { 1,0,0,1 });
+	gScene->addActor(*center);
+	
 	wmg = new WorldManager(10, gPhysics, gScene);
 	
 	}
@@ -107,14 +135,28 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	for(auto b:bullets)
+	//for(auto b:bullets)
 	//partic->integrate(t);
-	b->integrate(t);
+	//b->integrate(t);
 
 	if(psys!=NULL)
 	psys->update(t);
 
 	wmg->update(t);
+
+	for (auto ob = bullets.begin(); ob != bullets.end();) {
+		if ((*ob)->inTime()) {
+			(*ob)->addTime();
+			ob++;
+		}
+		else {
+			
+			delete* ob;
+			ob = bullets.erase(ob);
+		}
+	
+	
+	}
 
 	//mejor crear el generador de fuegos
 	
@@ -142,24 +184,31 @@ void cleanupPhysics(bool interactive)
 void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
-	
+	PxRigidDynamic* bul;
+	RigidBody* rigBul;
 
 	switch(toupper(key))
 	{
 	case 'B':
 		//pistola
-		bullets.push_back(new Mshot(0.4, { GetCamera()->getDir() * 250 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1},2));
+		//bullets.push_back(new Mshot(0.4, { GetCamera()->getDir() * 250 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1},2));
+		bul= gPhysics->createRigidDynamic(physx::PxTransform({ GetCamera()->getEye() }));
+		rigBul = new RigidBody(bul, { 0.5,0.5,0.5,1 }, 0);
+		bullets.push_back(rigBul);
+		gScene->addActor(*bul);
+		bul->setLinearVelocity(GetCamera()->getDir() * 250);
 		
 		break;
 	case 'L': {
 		//laser
-		bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 1000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 },{1,0,0,1},2));
+		//bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 1000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 },{1,0,0,1},2));
+		
 		break; 
 	}
 	case 'C':
 	{
 		//canyon
-		bullets.push_back(new Mshot(5, {GetCamera()->getDir() *150 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 },{0.7,0.6,0.2,1},5));
+		//bullets.push_back(new Mshot(5, {GetCamera()->getDir() *150 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 },{0.7,0.6,0.2,1},5));
 		break;
 	}
 	case 'F':
@@ -199,7 +248,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 				rz=rz-(2*rz);
 			}
 
-			bullets.push_back(new Mshot(0.1, {GetCamera()->getDir()*70 }, { GetCamera()->getEye() }, 0.7, { rx/10,ry/10,rz/10},{0,0,1,1},tamrnd));
+			//bullets.push_back(new Mshot(0.1, {GetCamera()->getDir()*70 }, { GetCamera()->getEye() }, 0.7, { rx/10,ry/10,rz/10},{0,0,1,1},tamrnd));
 		
 		break;
 	}
@@ -291,8 +340,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
+
+	
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
+
+	psys->activate = true;
+	
+	//gScene->removeActor(*actor2, false);
+
+
 }
 
 
