@@ -256,17 +256,24 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'G':
 		//if (!psys->getgrav) {
 		if (!wmg->getgrav) {
-			//psys->getgrav = true;
-			wmg->getgrav = true;
+			psys->getgrav = true;
+			
+		}
+		if (!psys->getgrav) {
+			//wmg->getgrav = true;
 		}
 		
 		break;
 	case 'T':
-		//if (!psys->getwind) {
+		if (!psys->getwind) { 
+			psys->getwind = true;
+			psys->createwindAreaForce();
+		}
+
 		if (!wmg->getwind) {
-			//psys->getwind = true;
+			
 			wmg->getwind = true;
-			//psys->createwindAreaForce();
+			
 			wmg->createwindAreaForce();
 		}
 		
@@ -294,14 +301,20 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	case 'X':
 		//desactivar
-		//if (psys->getgrav) {
+		if (psys->getgrav) {
+			psys->getgrav = false;
+	
+		}
 		if (wmg->getgrav) {
-			//psys->getgrav = false;
+			
 			wmg->getgrav = false;
 		}
-		//if (psys->getwind) {
+		if (psys->getwind) {
+		    psys->getwind = false;
+        }
+
 		if (wmg->getwind) {
-			//psys->getwind = false;
+			
 			wmg->getwind = false;
 		}
 		//if (psys->getexplosion) {

@@ -36,9 +36,9 @@ std::list<Particle*> PAgua::explode() {
 	for (int i = 0; i < 3; i++) {
 
 
-		auto vx = std::normal_distribution<float>{ 5, 7 }; //10,1
+		auto vx = std::normal_distribution<float>{ 5, 3 }; //10,1
 		auto vy = std::normal_distribution<float>{ 10, 1 };
-		auto vz = std::normal_distribution<float>{ 5, 11 };
+		auto vz = std::normal_distribution<float>{ 5, 2 };
 
 		float negx = rand() % 10 + 1;
 		//float negy = rand() % 10 + 1;
@@ -57,12 +57,14 @@ std::list<Particle*> PAgua::explode() {
 			velc.z = -velc.z;
 		}
 
-		else if (velc.y > 0) {
-			velc.y = -velc.y;
+		if (velc.y < 0) {
+			velc.y *= 2;
 		}
+		//velc.y = rand() % 3 + 10;
+		
 
 		//srand(time(NULL));
-		Particle* prt = new Particle(posit.p, velc * 2, 0.5, { 0,-1,0 }, { 0,1,1,1 }, 0.3, 0, false,100);
+		Particle* prt = new Particle(posit.p, velc * 2, 0.5, { 0,-1,0 }, { 0,1,1,1 }, 0.3, 0, false,75);
 		pag.push_back(prt);
 
 

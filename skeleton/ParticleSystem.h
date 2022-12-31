@@ -44,6 +44,7 @@ public:
 	void createwindAreaForce();
 
 	void generateSpring();
+	void generateMultiSpring();
 	void flota();
 
 	void eraseForces();

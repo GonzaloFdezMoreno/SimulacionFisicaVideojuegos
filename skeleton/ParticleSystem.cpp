@@ -50,7 +50,8 @@ void ParticleSystem::update(double t) {
 		}
 
 		if (create) {
-			generateSpring();
+			//generateSpring();
+			generateMultiSpring();
 		}
 		if (flotar) {
 			flota();
@@ -156,7 +157,7 @@ void ParticleSystem::createExplosionForce() {
 }
 
 void ParticleSystem::createwindAreaForce() {
-	wforceGen = new WindForceGenerator({ 5,0,5 }, 0.5, 0);
+	wforceGen = new WindForceGenerator({ 1,0,0 }, 0.5, 0);
 }
 
 void ParticleSystem::generateSpring() {
@@ -194,3 +195,36 @@ void ParticleSystem::flota() {
 //	wforceGen = nullptr;
 //	expForceGen = nullptr;
 //}
+
+
+
+
+void ParticleSystem::generateMultiSpring() {
+	//con punto fijo
+	Particle* panch = new Particle({ 50,65,50 }, { 0,0,0 }, 0.9, { 0,-2,0 }, { 0,1,1,1 }, 1, 2, false, 0);
+	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { 50,70,50 });
+	regfor->addRegistry(anfor, panch);
+	_particles.push_back(panch);
+	create = false;
+	vector<Particle*> pcuerda(5);
+
+	for (int j = 0; j < pcuerda.size(); j++) {
+		float newy = (60 - (j*5));
+		pcuerda[j] = new Particle({ 50,newy,50}, {0,0,0}, 0.9, {0,0,0}, {0,1,1,1}, 1, 2, false, 0);
+		_particles.push_back(pcuerda[j]);
+	}
+
+
+
+	for (int i = 0; i < pcuerda.size(); i++) {
+		if (i == 0) {
+			SpringForceGen* sfX = new SpringForceGen(10, 15, panch);
+			regfor->addRegistry(sfX, pcuerda[i]);
+
+		}
+		else {
+			SpringForceGen* sfX = new SpringForceGen(10, 15*(i+1), panch);
+			regfor->addRegistry(sfX, pcuerda[i]);
+		}
+	}
+}
