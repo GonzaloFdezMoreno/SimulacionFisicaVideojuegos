@@ -89,3 +89,15 @@ void WorldManager::createExplosionForce() {
 void WorldManager::createwindAreaForce() {
 	wforceGen = new WindForceGenerator({ 5,-5,5 }, 0.5, 0);
 }
+
+void WorldManager::createDiana2() {
+	physx::PxRigidStatic* dia2 = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
+	dia2->setName("baja");
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	physx::PxShape* shapeOuter = CreateShape(physx::PxBoxGeometry(20, 20, 0.2));
+	shapeOuter = CreateShape(physx::PxBoxGeometry(3, 3, 0.2));
+	dia2->attachShape(*shapeOuter);
+	item = new RenderItem(shapeOuter, dia2, { 0,0.5,0.5,1 });
+	scene->addActor(*dia2);
+	
+}

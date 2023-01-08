@@ -2,7 +2,7 @@
 
 ParticleSystem::ParticleSystem(int npart) {
 
-	uPG = new UniformParticleGenerator({2,2,0}, {1,2,1});
+	uPG = new UniformParticleGenerator({ 0,10,7 }, {1,2,1});
 	_particles_generators.push_back(uPG);
 
 	fireworkSysGen = new FireworkGenerator({ 0,20,0 }, { 0,100,0 });
@@ -51,7 +51,10 @@ void ParticleSystem::update(double t) {
 
 		if (create) {
 			//generateSpring();
-			generateMultiSpring();
+			for (int i = 0; i < 10; i++) {
+				
+				generateMultiSpring(i * 20);
+			}
 		}
 		if (flotar) {
 			flota();
@@ -199,32 +202,41 @@ void ParticleSystem::flota() {
 
 
 
-void ParticleSystem::generateMultiSpring() {
-	//con punto fijo
-	Particle* panch = new Particle({ 50,65,50 }, { 0,0,0 }, 0.9, { 0,-2,0 }, { 0,1,1,1 }, 1, 2, false, 0);
-	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { 50,70,50 });
+void ParticleSystem::generateMultiSpring(float desp) {
+	
+	Particle* panch = new Particle({ 100,95,desp-100}, { 0,0,0 }, 0.9, { 0,-2,0 }, { 0,1,1,1 }, 1, 2, false, 0);
+	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { 100,100,desp-100 });
 	regfor->addRegistry(anfor, panch);
 	_particles.push_back(panch);
 	create = false;
-	vector<Particle*> pcuerda(5);
+	vector<Particle*> pcuerda(4);
 
 	for (int j = 0; j < pcuerda.size(); j++) {
-		float newy = (60 - (j*5));
-		pcuerda[j] = new Particle({ 50,newy,50}, {0,0,0}, 0.9, {0,0,0}, {0,1,1,1}, 1, 2, false, 0);
+		float newy = (90 - (j*5));
+		pcuerda[j] = new Particle({ 100,newy,desp-100}, {0,0,0}, 0.9, {0,0,0}, {0,1,1,1}, 1, 2, false, 0);
 		_particles.push_back(pcuerda[j]);
 	}
 
-
+	int fu = desp/20;
 
 	for (int i = 0; i < pcuerda.size(); i++) {
-		if (i == 0) {
+		/*if (i == 0) {
 			SpringForceGen* sfX = new SpringForceGen(10, 15, panch);
 			regfor->addRegistry(sfX, pcuerda[i]);
 
 		}
-		else {
-			SpringForceGen* sfX = new SpringForceGen(10, 15*(i+1), panch);
+		else {*/
+		
+		//asincronos
+		if (fu % 2 == 0) {
+			SpringForceGen* sfX = new SpringForceGen(10, 15 * (i + 1), panch);
 			regfor->addRegistry(sfX, pcuerda[i]);
 		}
+		else {
+			SpringForceGen* sfX = new SpringForceGen(10/1.1, (15/1.1) * (i + 1), panch);
+			regfor->addRegistry(sfX, pcuerda[i]);
+		}
+			
+		//}
 	}
 }

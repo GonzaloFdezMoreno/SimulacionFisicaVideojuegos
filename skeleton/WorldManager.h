@@ -8,6 +8,7 @@
 #include "UniformParticleGenerator.h"
 #include "ObjectForceRegistry.h"
 #include "RigidBody.h"
+#include "StaticRigidBody.h"
 #include <random>
 #include <list>
 
@@ -26,11 +27,16 @@ public:
 	void createExplosionForce();
 	void createwindAreaForce();
 
+	void createDiana2();
+
 
 protected:
 	std::mt19937 rnd;
 	physx::PxPhysics* phy = NULL;
 	physx::PxScene* scene = NULL;
+
+	RenderItem* item = NULL;
+
 	std::list<RigidBody*> _objects;
 	std::list<physx::PxRigidDynamic*> _rigidobjects;
 	

@@ -120,6 +120,9 @@
     <ClInclude Include="PAgua.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="StaticRigidBody.h">
+      <Filter>RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

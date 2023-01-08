@@ -39,6 +39,8 @@ ContactReportCallback gContactReportCallback;
 
 Particle* partic = NULL;
 std::vector<RigidBody*> bullets ;
+std::vector<StaticRigidBody*> diana ;
+
 Plane* plan = NULL;
 ParticleSystem* psys = NULL;
 //Firework* fwo = NULL;
@@ -47,6 +49,9 @@ std::vector<Firework*> fwoVec;
 RenderItem* item = NULL;
 
 WorldManager* wmg = NULL;
+
+int points = 0;
+bool diana2creada = false;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -85,40 +90,60 @@ void initPhysics(bool interactive)
 	gScene->addActor(*suelo);
 
 
-	PxRigidStatic* outer = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
-	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	PxShape* shapeOuter = CreateShape(PxBoxGeometry(20, 20, 0.2));
-	outer->attachShape(*shapeOuter);
-	item = new RenderItem(shapeOuter, outer, { 0,0.5,0.5,1 });
+	PxRigidStatic* outer = gPhysics->createRigidStatic(PxTransform({0,100,-30}));
+	outer->setName("baja");
+
+	StaticRigidBody* fue = new StaticRigidBody(outer, { 0.0,0.5,0.5,1 }, 2, 0,{20,20,0.2});
+
+	////PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	//PxShape* shapeOuter = CreateShape(PxBoxGeometry(20, 20, 0.2));
+	//outer->attachShape(*shapeOuter);
+	//item = new RenderItem(shapeOuter, outer, { 0,0.5,0.5,1 });
 	gScene->addActor(*outer);
+	diana.push_back(fue);
+
 	
-	PxRigidStatic* midA = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	PxRigidStatic* midA = gPhysics->createRigidStatic(PxTransform({0,100,-30}));
+	midA->setName("media-baja");
+	StaticRigidBody* mA = new StaticRigidBody(midA, { 0.0,0,0.8,1 }, 2, 0, { 15,15,0.25 });
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	PxShape* shapeMidA = CreateShape(PxBoxGeometry(15, 15, 0.25));
+	/*PxShape* shapeMidA = CreateShape(PxBoxGeometry(15, 15, 0.25));
 	midA->attachShape(*shapeMidA);
-	item = new RenderItem(shapeMidA, midA, { 0,0,0.8,1 });
+	item = new RenderItem(shapeMidA, midA, { 0,0,0.8,1 });*/
 	gScene->addActor(*midA);
+	diana.push_back(mA);
 	
-	PxRigidStatic* midB = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	PxRigidStatic* midB = gPhysics->createRigidStatic(PxTransform({0,100,-30}));
+	midB->setName("media");
+	StaticRigidBody* mB = new StaticRigidBody(midB, { 0.0,0.8,0.0,1 }, 2, 0, { 10,10,0.3 });
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	PxShape* shapeMidB = CreateShape(PxBoxGeometry(10, 10, 0.3));
+	/*PxShape* shapeMidB = CreateShape(PxBoxGeometry(10, 10, 0.3));
 	midB->attachShape(*shapeMidB);
-	item = new RenderItem(shapeMidB, midB, { 0,0.8,0,1 });
+	item = new RenderItem(shapeMidB, midB, { 0,0.8,0,1 });*/
 	gScene->addActor(*midB);
+	diana.push_back(mB);
 	
-	PxRigidStatic* midC = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	PxRigidStatic* midC = gPhysics->createRigidStatic(PxTransform({0,100,-30}));
+	midC->setName("media-alta");
+	StaticRigidBody* mC = new StaticRigidBody(midC, { 0.8,0.8,0,1 }, 2, 0, { 5,5,0.35 });
+
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	PxShape* shapeMidC = CreateShape(PxBoxGeometry(5, 5, 0.35));
+	/*PxShape* shapeMidC = CreateShape(PxBoxGeometry(5, 5, 0.35));
 	midC->attachShape(*shapeMidC);
-	item = new RenderItem(shapeMidC, midC, { 0.8,0.8,0,1 });
+	item = new RenderItem(shapeMidC, midC, { 0.8,0.8,0,1 });*/
 	gScene->addActor(*midC);
+	diana.push_back(mC);
 	
-	PxRigidStatic* center = gPhysics->createRigidStatic(PxTransform({10,10,-30}));
+	PxRigidStatic* center = gPhysics->createRigidStatic(PxTransform({0,100,-30}));
+	center->setName("alta");
+	StaticRigidBody* cen = new StaticRigidBody(center, { 1,0,0,1 }, 2, 0, { 2,2,0.4 });
+
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	PxShape* shapeCenter = CreateShape(PxBoxGeometry(2, 2, 0.4));
+	/*PxShape* shapeCenter = CreateShape(PxBoxGeometry(2, 2, 0.4));
 	center->attachShape(*shapeCenter);
-	item = new RenderItem(shapeCenter, center, { 1,0,0,1 });
+	item = new RenderItem(shapeCenter, center, { 1,0,0,1 });*/
 	gScene->addActor(*center);
+	diana.push_back(cen);
 	
 	wmg = new WorldManager(10, gPhysics, gScene);
 	
@@ -145,17 +170,39 @@ void stepPhysics(bool interactive, double t)
 	wmg->update(t);
 
 	for (auto ob = bullets.begin(); ob != bullets.end();) {
-		if ((*ob)->inTime()) {
-			(*ob)->addTime();
-			ob++;
+		if ((*ob)->obj->getGlobalPose().p.y >= 10) {
+			if ((*ob)->inTime()) {
+				(*ob)->addTime();
+				ob++;
+			}
+			else {
+			
+			delete* ob;
+			ob = bullets.erase(ob);
+			}
+		
+
 		}
 		else {
 			
+
 			delete* ob;
 			ob = bullets.erase(ob);
 		}
 	
 	
+	}
+
+	if (points >= 5 && !diana2creada) {
+		for (auto di = diana.begin(); di != diana.end();) {
+
+			delete* di;
+			di = diana.erase(di);
+		}
+
+	
+		wmg->createDiana2();
+		diana2creada = true;
 	}
 
 	//mejor crear el generador de fuegos
@@ -193,10 +240,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//pistola
 		//bullets.push_back(new Mshot(0.4, { GetCamera()->getDir() * 250 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1},2));
 		bul= gPhysics->createRigidDynamic(physx::PxTransform({ GetCamera()->getEye() }));
-		rigBul = new RigidBody(bul, { 0.5,0.5,0.5,1 }, 0);
+		rigBul = new RigidBody(bul, { 0.5,0.5,0.5,1 }, 0, 2);
 		bullets.push_back(rigBul);
+
+		bul->setMass(2);
 		gScene->addActor(*bul);
+		bul->setName("bala");
 		bul->setLinearVelocity(GetCamera()->getDir() * 250);
+		
 		
 		break;
 	case 'L': {
@@ -265,10 +316,10 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		
 		break;
 	case 'T':
-		if (!psys->getwind) { 
+		/*if (!psys->getwind) { 
 			psys->getwind = true;
 			psys->createwindAreaForce();
-		}
+		}*/
 
 		if (!wmg->getwind) {
 			
@@ -357,8 +408,11 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
-
-	psys->activate = true;
+	if (actor2->getName() == "media"&&points<6) {
+		psys->activate = true;
+		points++;
+	}
+	
 	
 	//gScene->removeActor(*actor2, false);
 

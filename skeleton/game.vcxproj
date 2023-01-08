@@ -284,6 +284,7 @@
     <ClInclude Include="ObjectForceRegistry.h" />
     <ClInclude Include="PAgua.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="StaticRigidBody.h" />
     <ClInclude Include="WorldManager.h" />
     <ClInclude Include="Mshot.h" />
     <ClInclude Include="Particle.h" />
