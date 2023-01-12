@@ -27,8 +27,13 @@ public:
 	void createExplosionForce();
 	void createwindAreaForce();
 
+	void createDiana();
 	void createDiana2();
-
+	void createDiana3();
+	void createDiana4();
+	void createDiana5();
+	
+	void addPoints() { points++; }
 
 protected:
 	std::mt19937 rnd;
@@ -52,6 +57,13 @@ protected:
 	ExplosionForceGenerator* expForceGen = nullptr;
 	WhirlpoolForceGenerator* whForceGen = nullptr;
 
+	std::vector<StaticRigidBody*> diana;
+
 	float delay = 0;
 	bool create = true;
+	int points = 0;
+	bool diana2creada = false;
+	bool diana3creada = false;
+	bool diana4creada = false;
+	bool diana5creada = false;
 };

@@ -52,6 +52,30 @@ void WorldManager::update(double t) {
 		
 	}
 
+	if (points >= 5 && !diana2creada) {
+		for (auto di = diana.begin(); di != diana.end();) {
+
+			delete* di;
+			di = diana.erase(di);
+		}
+
+
+		createDiana2();
+		diana2creada = true;
+	}
+
+	else if (points >= 7 && !diana3creada) {
+		for (auto di = diana.begin(); di != diana.end();) {
+
+			delete* di;
+			di = diana.erase(di);
+		}
+
+
+		createDiana3();
+		diana3creada = true;
+	}
+
 	//if (_objects.size() < nob) {
 	//	//if (create) {
 	//		std::list<physx::PxRigidDynamic*> odyn = uPG->generateObjects(phy, scene);
@@ -90,14 +114,102 @@ void WorldManager::createwindAreaForce() {
 	wforceGen = new WindForceGenerator({ 5,-5,5 }, 0.5, 0);
 }
 
-void WorldManager::createDiana2() {
-	physx::PxRigidStatic* dia2 = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
-	dia2->setName("baja");
+
+
+void WorldManager::createDiana() {
+	physx::PxRigidStatic* outer = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
+	outer->setName("baja");
+
+	StaticRigidBody* fue = new StaticRigidBody(outer, { 0.0,0.5,0.5,1 }, 2, 0, { 20,20,0.2 });
+
+	////PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	//PxShape* shapeOuter = CreateShape(PxBoxGeometry(20, 20, 0.2));
+	//outer->attachShape(*shapeOuter);
+	//item = new RenderItem(shapeOuter, outer, { 0,0.5,0.5,1 });
+	scene->addActor(*outer);
+	diana.push_back(fue);
+
+
+	physx::PxRigidStatic* midA = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
+	midA->setName("media-baja");
+	StaticRigidBody* mA = new StaticRigidBody(midA, { 0.0,0,0.8,1 }, 2, 0, { 15,15,0.25 });
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	physx::PxShape* shapeOuter = CreateShape(physx::PxBoxGeometry(20, 20, 0.2));
-	shapeOuter = CreateShape(physx::PxBoxGeometry(3, 3, 0.2));
-	dia2->attachShape(*shapeOuter);
-	item = new RenderItem(shapeOuter, dia2, { 0,0.5,0.5,1 });
-	scene->addActor(*dia2);
+	/*PxShape* shapeMidA = CreateShape(PxBoxGeometry(15, 15, 0.25));
+	midA->attachShape(*shapeMidA);
+	item = new RenderItem(shapeMidA, midA, { 0,0,0.8,1 });*/
+	scene->addActor(*midA);
+	diana.push_back(mA);
+
+	physx::PxRigidStatic* midB = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
+	midB->setName("media");
+	StaticRigidBody* mB = new StaticRigidBody(midB, { 0.0,0.8,0.0,1 }, 2, 0, { 10,10,0.3 });
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	/*PxShape* shapeMidB = CreateShape(PxBoxGeometry(10, 10, 0.3));
+	midB->attachShape(*shapeMidB);
+	item = new RenderItem(shapeMidB, midB, { 0,0.8,0,1 });*/
+	scene->addActor(*midB);
+	diana.push_back(mB);
+
+	physx::PxRigidStatic* midC = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
+	midC->setName("media-alta");
+	StaticRigidBody* mC = new StaticRigidBody(midC, { 0.8,0.8,0,1 }, 2, 0, { 5,5,0.35 });
+
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	/*PxShape* shapeMidC = CreateShape(PxBoxGeometry(5, 5, 0.35));
+	midC->attachShape(*shapeMidC);
+	item = new RenderItem(shapeMidC, midC, { 0.8,0.8,0,1 });*/
+	scene->addActor(*midC);
+	diana.push_back(mC);
+
+	physx::PxRigidStatic* center = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
+	center->setName("alta");
+	StaticRigidBody* cen = new StaticRigidBody(center, { 1,0,0,1 }, 2, 0, { 2,2,0.4 });
+
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	/*PxShape* shapeCenter = CreateShape(PxBoxGeometry(2, 2, 0.4));
+	center->attachShape(*shapeCenter);
+	item = new RenderItem(shapeCenter, center, { 1,0,0,1 });*/
+	scene->addActor(*center);
+	diana.push_back(cen);
+}
+
+
+void WorldManager::createDiana2() {
+	physx::PxRigidStatic* diaB2 = phy->createRigidStatic(physx::PxTransform({ 50,70,30 }));
+	diaB2->setName("baja2");
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	StaticRigidBody* out2 = new StaticRigidBody(diaB2, { 1,1,0,1 }, 2, 0, { 5,5,0.2 });
 	
+	scene->addActor(*diaB2);
+	diana.push_back(out2);
+
+	physx::PxRigidStatic* diaM2 = phy->createRigidStatic(physx::PxTransform({ 50,70,30 }));
+	diaM2->setName("media2");
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	StaticRigidBody* med2 = new StaticRigidBody(diaM2, { 1,0,0,1 }, 2, 0, { 3.5,3.5,0.3 });
+	scene->addActor(*diaM2);
+	diana.push_back(med2);
+
+	physx::PxRigidStatic* diaA2 = phy->createRigidStatic(physx::PxTransform({ 50,70,30 }));
+	diaA2->setName("alta2");
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	StaticRigidBody* cen2 = new StaticRigidBody(diaA2, { 1,0,1,1 }, 2, 0, { 2,2,0.4 });
+	scene->addActor(*diaA2);
+	diana.push_back(cen2);
+	
+
+	//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista
+}
+
+void WorldManager::createDiana3() {
+	
+	physx::PxRigidStatic* diaA3 = phy->createRigidStatic(physx::PxTransform({ 50,50,-70 }));
+	diaA3->setName("alta3");
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	StaticRigidBody* cen3 = new StaticRigidBody(diaA3, { 1,0,1,1 }, 2, 0, { 1,1,0.4 });
+	scene->addActor(*diaA3);
+	diana.push_back(cen3);
+
+
+	//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista
 }
