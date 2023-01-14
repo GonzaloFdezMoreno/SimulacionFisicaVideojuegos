@@ -38,7 +38,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 Particle* partic = NULL;
-std::vector<RigidBody*> bullets ;
+//std::vector<RigidBody*> bullets ;
 
 
 Plane* plan = NULL;
@@ -115,7 +115,7 @@ void stepPhysics(bool interactive, double t)
 
 	wmg->update(t);
 
-	for (auto ob = bullets.begin(); ob != bullets.end();) {
+	/*for (auto ob = bullets.begin(); ob != bullets.end();) {
 		if ((*ob)->obj->getGlobalPose().p.y >= 10) {
 			if ((*ob)->inTime()) {
 				(*ob)->addTime();
@@ -137,7 +137,7 @@ void stepPhysics(bool interactive, double t)
 		}
 	
 	
-	}
+	}*/
 
 	
 
@@ -177,7 +177,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//bullets.push_back(new Mshot(0.4, { GetCamera()->getDir() * 250 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1},2));
 		bul= gPhysics->createRigidDynamic(physx::PxTransform({ GetCamera()->getEye() }));
 		rigBul = new RigidBody(bul, { 0.5,0.5,0.5,1 }, 0, 2);
-		bullets.push_back(rigBul);
+		//bullets.push_back(rigBul);
+		wmg->addToList(rigBul);
 
 		bul->setMass(2);
 		gScene->addActor(*bul);
@@ -350,6 +351,16 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	}
 
 	if (actor2->getName() == "media2") {
+		wmg->addPoints();
+		psys->activate = true;
+	}
+
+	if (actor2->getName() == "alta3") {
+		wmg->addPoints();
+		psys->activate = true;
+	}
+
+	if (actor2->getName() == "alta4") {
 		wmg->addPoints();
 		psys->activate = true;
 	}

@@ -76,6 +76,18 @@ void WorldManager::update(double t) {
 		diana3creada = true;
 	}
 
+	else if (points >= 8 && !diana4creada) {
+		for (auto di = diana.begin(); di != diana.end();) {
+
+			delete* di;
+			di = diana.erase(di);
+		}
+
+
+		createDiana4();
+		diana4creada = true;
+	}
+
 	//if (_objects.size() < nob) {
 	//	//if (create) {
 	//		std::list<physx::PxRigidDynamic*> odyn = uPG->generateObjects(phy, scene);
@@ -101,6 +113,30 @@ void WorldManager::update(double t) {
 	//		}
 	//	}*/
 	//}
+
+	for (auto ob = _objects.begin(); ob != _objects.end();) {
+		if ((*ob)->obj->getGlobalPose().p.y >= 10) {
+			if ((*ob)->inTime()) {
+				(*ob)->addTime();
+				ob++;
+			}
+			else {
+
+				delete* ob;
+				ob = _objects.erase(ob);
+			}
+
+
+		}
+		else {
+
+
+			delete* ob;
+			ob = _objects.erase(ob);
+		}
+
+
+	}
 	
 }
 
@@ -114,6 +150,9 @@ void WorldManager::createwindAreaForce() {
 	wforceGen = new WindForceGenerator({ 5,-5,5 }, 0.5, 0);
 }
 
+void WorldManager::addToList(RigidBody* rigid) {
+	_objects.push_back(rigid);
+}
 
 
 void WorldManager::createDiana() {
@@ -203,12 +242,29 @@ void WorldManager::createDiana2() {
 
 void WorldManager::createDiana3() {
 	
-	physx::PxRigidStatic* diaA3 = phy->createRigidStatic(physx::PxTransform({ 50,50,-70 }));
+	physx::PxRigidStatic* diaA3 = phy->createRigidStatic(physx::PxTransform({ -50,50,-70 }));
 	diaA3->setName("alta3");
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	StaticRigidBody* cen3 = new StaticRigidBody(diaA3, { 1,0,1,1 }, 2, 0, { 1,1,0.4 });
+	StaticRigidBody* cen3 = new StaticRigidBody(diaA3, { 0.3,0.2,0.5,1 }, 2, 0, { 1.5,1.5,0.4 });
 	scene->addActor(*diaA3);
 	diana.push_back(cen3);
+
+
+	//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista
+}
+
+void WorldManager::createDiana4() {
+	getexplosion = true;
+	expForceGen = new ExplosionForceGenerator({ -10,75,-35 }, 10, 2);
+	expForceGen2 = new ExplosionForceGenerator({ 0,80,-45 }, 5, 2);
+	expForceGen3 = new ExplosionForceGenerator({ -15,67,-40 }, 7, 2);
+
+	physx::PxRigidStatic* diaA4 = phy->createRigidStatic(physx::PxTransform({ -20,70,-40 }));
+	diaA4->setName("alta4");
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	StaticRigidBody* cen4 = new StaticRigidBody(diaA4, { 0.3,0.2,0.5,1 }, 2, 0, { 2.5,2.5,0.4 });
+	scene->addActor(*diaA4);
+	diana.push_back(cen4);
 
 
 	//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista

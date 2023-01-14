@@ -27,6 +27,8 @@ public:
 	void createExplosionForce();
 	void createwindAreaForce();
 
+	void addToList(RigidBody* rigid);
+
 	void createDiana();
 	void createDiana2();
 	void createDiana3();
@@ -55,6 +57,8 @@ protected:
 	GravityForceGenerator* gforceGen = nullptr;
 	WindForceGenerator* wforceGen = nullptr;
 	ExplosionForceGenerator* expForceGen = nullptr;
+	ExplosionForceGenerator* expForceGen2 = nullptr;
+	ExplosionForceGenerator* expForceGen3 = nullptr;
 	WhirlpoolForceGenerator* whForceGen = nullptr;
 
 	std::vector<StaticRigidBody*> diana;
