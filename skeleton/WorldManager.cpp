@@ -34,6 +34,8 @@ void WorldManager::update(double t) {
 		if (getexplosion) {
 			if (expForceGen != nullptr)
 				regforobj->addRegistry(expForceGen, (*ob)->obj);
+				regforobj->addRegistry(expForceGen2, (*ob)->obj);
+				regforobj->addRegistry(expForceGen3, (*ob)->obj);
 		}
 		if (getWhirl) {
 			regforobj->addRegistry(whForceGen, (*ob)->obj);
@@ -255,9 +257,9 @@ void WorldManager::createDiana3() {
 
 void WorldManager::createDiana4() {
 	getexplosion = true;
-	expForceGen = new ExplosionForceGenerator({ -10,75,-35 }, 10, 2);
-	expForceGen2 = new ExplosionForceGenerator({ 0,80,-45 }, 5, 2);
-	expForceGen3 = new ExplosionForceGenerator({ -15,67,-40 }, 7, 2);
+	expForceGen = new ExplosionForceGenerator({ -10,60,-30 }, 10, 2);
+	expForceGen2 = new ExplosionForceGenerator({ -20,80,-35 }, 10, 2);
+	expForceGen3 = new ExplosionForceGenerator({ -30,63,-20 }, 10, 2);
 
 	physx::PxRigidStatic* diaA4 = phy->createRigidStatic(physx::PxTransform({ -20,70,-40 }));
 	diaA4->setName("alta4");

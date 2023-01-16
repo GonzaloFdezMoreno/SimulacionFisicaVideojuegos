@@ -92,6 +92,8 @@ void initPhysics(bool interactive)
 	wmg = new WorldManager(10, gPhysics, gScene);
 
 	wmg->createDiana();
+
+	
 	
 	}
 
@@ -180,7 +182,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//bullets.push_back(rigBul);
 		wmg->addToList(rigBul);
 
-		bul->setMass(2);
+		bul->setMass(0.4);
+		bul->setLinearDamping(0.5);
 		gScene->addActor(*bul);
 		bul->setName("bala");
 		bul->setLinearVelocity(GetCamera()->getDir() * 250);
@@ -195,8 +198,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	case 'C':
 	{
-		//canyon
-		//bullets.push_back(new Mshot(5, {GetCamera()->getDir() *150 }, {GetCamera()->getEye() }, 0.99, { 0,-2.0,0 },{0.7,0.6,0.2,1},5));
+		bul = gPhysics->createRigidDynamic(physx::PxTransform({ GetCamera()->getEye() }));
+		rigBul = new RigidBody(bul, { 1,0.5,0.5,1 }, 2, 3);
+
+		//bullets.push_back(rigBul);
+		wmg->addToList(rigBul);
+		bul->setLinearDamping(0.8);
+		bul->setMass(3);
+		gScene->addActor(*bul);
+		bul->setName("bala");
+		bul->setLinearVelocity(GetCamera()->getDir() * 100);
 		break;
 	}
 	case 'F':
@@ -364,7 +375,11 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 		wmg->addPoints();
 		psys->activate = true;
 	}
-	
+
+	if (actor2->getName() == "alta5") {
+		wmg->addPoints();
+		psys->activate = true;
+	}
 	
 	//gScene->removeActor(*actor2, false);
 
