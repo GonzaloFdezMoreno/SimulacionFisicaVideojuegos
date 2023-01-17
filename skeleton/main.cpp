@@ -50,7 +50,7 @@ RenderItem* item = NULL;
 
 WorldManager* wmg = NULL;
 
-
+bool choca = true;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -189,6 +189,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		bul->setLinearVelocity(GetCamera()->getDir() * 250);
 		
 		
+		choca = true;
+
 		break;
 	case 'L': {
 		//laser
@@ -208,6 +210,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		gScene->addActor(*bul);
 		bul->setName("bala");
 		bul->setLinearVelocity(GetCamera()->getDir() * 100);
+
+		choca = true;
+
 		break;
 	}
 	case 'F':
@@ -356,32 +361,38 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
-	if (actor2->getName() == "media"&& !wmg->diana1destruida) {
-		psys->activate = true;
-		wmg->addPoints();
-	}
+	if (choca) {
+		if (actor2->getName() == "media" && !wmg->diana1destruida) {
+			psys->activate = true;
+			wmg->addPoints();
+			choca = false;
+		}
 
-	if (actor2->getName() == "media2" && !wmg->diana2destruida) {
-		wmg->addPoints();
-		psys->activate = true;
-	}
+		if (actor2->getName() == "media2" && !wmg->diana2destruida) {
+			wmg->addPoints();
+			psys->activate = true;
+			choca = false;
+		}
 
-	if (actor2->getName() == "alta3" && !wmg->diana3destruida) {
-		wmg->addPoints();
-		psys->activate = true;
-	}
+		if (actor2->getName() == "alta3" && !wmg->diana3destruida) {
+			wmg->addPoints();
+			psys->activate = true;
+			choca = false;
+		}
 
-	if (actor2->getName() == "alta4" && !wmg->diana4destruida) {
-		wmg->addPoints();
-		psys->activate = true;
-	}
+		if (actor2->getName() == "alta4" && !wmg->diana4destruida) {
+			wmg->addPoints();
+			psys->activate = true;
+			choca = false;
+		}
 
-	if (actor2->getName() == "alta5" && !wmg->diana5destruida) {
-		wmg->addPoints();
-		psys->activate = true;
+		if (actor2->getName() == "alta5" && !wmg->diana5destruida) {
+			wmg->addPoints();
+			psys->activate = true;
+			choca = false;
+		}
+		
 	}
-	
-	
 
 
 }
