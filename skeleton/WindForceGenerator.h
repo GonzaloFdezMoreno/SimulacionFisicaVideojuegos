@@ -2,12 +2,14 @@
 
 #include "ForceGenerator.h"
 #include "core.hpp"
+#include <list>
 
 class WindForceGenerator : public ForceGenerator {
 public:
-	WindForceGenerator(const Vector3& w,float ka,float kb):_windir(w),k1(ka),k2(kb) {
-		rd = 40;
-		area = new Particle({50,0,50}, {0,0,0}, 0, {0,0,0}, {0,0,0,0.0}, rd, 0,false,0);
+	WindForceGenerator(const Vector3& w,float ka,float kb,int rad):_windir(w),k1(ka),k2(kb) {
+		rd = rad;
+		area = new Particle({0,40,0}, {0,0,0}, 0, {0,0,0}, {0,0,0,0.0}, rd, 0,false,0);
+		areaL.push_back(area);
 	}
 	~WindForceGenerator() { delete area; }
 	virtual void updateForce(Particle* particle, double t) {
@@ -59,8 +61,19 @@ public:
 			}
 		}
 	}
+
+	void eraseArea() {
+		for (auto ar=areaL.begin(); ar != areaL.end();) {
+			delete* ar;
+			ar = areaL.erase(ar);
+		}
+	}
+
+
 protected:
 	Particle* area;
+
+	std::list<Particle*> areaL;
 	Vector3 _windir;
 	float k1, k2;
 	bool iswhirl = false;

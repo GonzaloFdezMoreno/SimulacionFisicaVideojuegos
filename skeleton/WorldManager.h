@@ -37,6 +37,14 @@ public:
 	
 	void addPoints() { points++; }
 
+	bool diana1destruida = false;
+	bool diana2destruida = false;
+	bool diana3destruida = false;
+	bool diana4destruida = false;
+	bool diana5destruida = false;
+
+
+
 protected:
 	std::mt19937 rnd;
 	physx::PxPhysics* phy = NULL;
@@ -70,4 +78,6 @@ protected:
 	bool diana3creada = false;
 	bool diana4creada = false;
 	bool diana5creada = false;
+
+	
 };

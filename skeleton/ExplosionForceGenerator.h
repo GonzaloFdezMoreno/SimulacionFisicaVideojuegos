@@ -2,12 +2,14 @@
 
 #include "ForceGenerator.h"
 #include "core.hpp"
+#include <list>
 
 class ExplosionForceGenerator : public ForceGenerator {
 public:
 	ExplosionForceGenerator(const Vector3& pos, float rad,double con) : pos_(pos), rd(rad),kon(con) {
 		//expArea = new Particle(pos, { 0,0,0 }, 0, { 0,0,0 }, { 0,0,0,0.2 },rd, 0,false,false);
 		expArea = new Particle(pos, { 0,0,0 }, 0, { 0,0,0 }, { 0,0,0,0.2 },rd, 0,false,0);
+		areaL.push_back(expArea);
 		
 	}
 	~ExplosionForceGenerator() { delete expArea; }
@@ -54,10 +56,20 @@ public:
 		}
 	}
 
+	
+	void eraseArea() {
+		for (auto ar = areaL.begin(); ar != areaL.end();) {
+			delete* ar;
+			ar = areaL.erase(ar);
+		}
+		
+	}
+
 
 protected:
 
 	Particle* expArea;
+	std::list<Particle*> areaL;
 	float tim = 0.0f;
 	Vector3 pos_;
 	float rd;

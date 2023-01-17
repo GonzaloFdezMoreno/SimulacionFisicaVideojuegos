@@ -18,8 +18,8 @@ ParticleSystem::ParticleSystem(int npart) {
 	nump = npart;
 	srand(time(NULL));
 
-	gforceGen = new GravityForceGenerator({ 0,-9.8,0 });
-	whForceGen = new WhirlpoolForceGenerator(1, 0.5, { 20,100,20 },0.4);
+	//gforceGen = new GravityForceGenerator({ 0,-9.8,0 });
+	//whForceGen = new WhirlpoolForceGenerator(1, 0.5, { 20,100,20 },0.4);
 
 
 }
@@ -160,7 +160,7 @@ void ParticleSystem::createExplosionForce() {
 }
 
 void ParticleSystem::createwindAreaForce() {
-	wforceGen = new WindForceGenerator({ 1,0,0 }, 0.5, 0);
+	wforceGen = new WindForceGenerator({ 1,0,0 }, 0.5, 0,50);
 }
 
 void ParticleSystem::generateSpring() {

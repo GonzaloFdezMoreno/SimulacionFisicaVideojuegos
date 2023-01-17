@@ -9,8 +9,8 @@ WorldManager::WorldManager(int nobj, physx::PxPhysics* phys, physx::PxScene* sc)
 	regforobj = new ObjectForceRegistry();
 	srand(time(NULL));
 
-	gforceGen = new GravityForceGenerator({ 0,-9.8,0 });
-	whForceGen = new WhirlpoolForceGenerator(1, 0.5, { 20,100,20 }, 0.4);
+	//gforceGen = new GravityForceGenerator({ 0,-9.8,0 });
+	//whForceGen = new WhirlpoolForceGenerator(1, 0.5, { 20,100,20 }, 0.4);
 }
 
 
@@ -60,10 +60,11 @@ void WorldManager::update(double t) {
 			delete* di;
 			di = diana.erase(di);
 		}
-
+		diana1destruida = true;
 
 		createDiana2();
 		diana2creada = true;
+		
 	}
 
 	else if (points >= 7 && !diana3creada) {
@@ -71,8 +72,9 @@ void WorldManager::update(double t) {
 
 			delete* di;
 			di = diana.erase(di);
+			
 		}
-
+		diana2destruida = true;
 
 		createDiana3();
 		diana3creada = true;
@@ -84,10 +86,27 @@ void WorldManager::update(double t) {
 			delete* di;
 			di = diana.erase(di);
 		}
-
+		diana3destruida = true;
 
 		createDiana4();
 		diana4creada = true;
+	}
+
+	else if (points >= 9 && !diana5creada) {
+		for (auto di = diana.begin(); di != diana.end();) {
+
+			delete* di;
+			di = diana.erase(di);
+		}
+		expForceGen->eraseArea();
+		expForceGen2->eraseArea();
+		expForceGen3->eraseArea();
+
+		diana4destruida = true;
+
+		getexplosion = false;
+		createDiana5();
+		diana5creada = true;
 	}
 
 	//if (_objects.size() < nob) {
@@ -149,14 +168,14 @@ void WorldManager::createExplosionForce() {
 }
 
 void WorldManager::createwindAreaForce() {
-	wforceGen = new WindForceGenerator({ 5,-5,5 }, 0.5, 0);
+	//wforceGen = new WindForceGenerator({ 5,-5,5 }, 0.5, 0);
 }
 
 void WorldManager::addToList(RigidBody* rigid) {
 	_objects.push_back(rigid);
 }
 
-
+//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista
 void WorldManager::createDiana() {
 	physx::PxRigidStatic* outer = phy->createRigidStatic(physx::PxTransform({ 0,100,-30 }));
 	outer->setName("baja");
@@ -239,7 +258,7 @@ void WorldManager::createDiana2() {
 	diana.push_back(cen2);
 	
 
-	//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista
+	
 }
 
 void WorldManager::createDiana3() {
@@ -252,7 +271,7 @@ void WorldManager::createDiana3() {
 	diana.push_back(cen3);
 
 
-	//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista
+	
 }
 
 void WorldManager::createDiana4() {
@@ -269,5 +288,20 @@ void WorldManager::createDiana4() {
 	diana.push_back(cen4);
 
 
-	//crear aqui las dianas y quitarlas/ponerlas con los puntos a través de una lista
+	
+}
+
+void WorldManager::createDiana5() {
+	getwind = true;
+	wforceGen = new WindForceGenerator({ 500,0,500 }, 0.5, 0, 70);
+
+	physx::PxRigidStatic* diaA5 = phy->createRigidStatic(physx::PxTransform({ 0,40,0 }));
+	diaA5->setName("alta5");
+	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
+	StaticRigidBody* cen5 = new StaticRigidBody(diaA5, { 0.3,0.2,0.5,1 }, 2, 0, { 2,0.4,2 });
+	scene->addActor(*diaA5);
+	diana.push_back(cen5);
+
+
+	
 }

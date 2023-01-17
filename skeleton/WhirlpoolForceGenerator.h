@@ -5,7 +5,7 @@
 
 class WhirlpoolForceGenerator : public WindForceGenerator {
 public:
-	WhirlpoolForceGenerator(float k1, float k2, const Vector3& pos,float k0) :WindForceGenerator({0,0,0}, k1, k2),
+	WhirlpoolForceGenerator(float k1, float k2, const Vector3& pos,float k0) :WindForceGenerator({0,0,0}, k1, k2,30),
 		poscentro(pos),kf(k0)
 	{
 		

@@ -203,7 +203,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 		//bullets.push_back(rigBul);
 		wmg->addToList(rigBul);
-		bul->setLinearDamping(0.8);
+		bul->setLinearDamping(0.5);
 		bul->setMass(3);
 		gScene->addActor(*bul);
 		bul->setName("bala");
@@ -224,28 +224,28 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		//pompas
 		
-			srand(time(NULL));
-			//aceleraciones aleatorias 
-			float rx = rand() % 2+0;
-			float ry = rand() % 2+1;
-			float rz = rand() % 2+0;
+			//srand(time(NULL));
+			////aceleraciones aleatorias 
+			//float rx = rand() % 2+0;
+			//float ry = rand() % 2+1;
+			//float rz = rand() % 2+0;
 
-			//para poner aceleraciones positivas y negativas  
-			float negx = rand() % 10+1;
-			float negy = rand() % 10+1;
-			float negz = rand() % 10+1;
+			////para poner aceleraciones positivas y negativas  
+			//float negx = rand() % 10+1;
+			//float negy = rand() % 10+1;
+			//float negz = rand() % 10+1;
 
-			int tamrnd = rand() % 4 + 1;
+			//int tamrnd = rand() % 4 + 1;
 
-			if (negx < 5) {
-				rx=rx-(2*rx);
-			}
-			else if (negy < 5) {
-				ry=ry-(2*ry);
-			}
-			else if (negz < 5) {
-				rz=rz-(2*rz);
-			}
+			//if (negx < 5) {
+			//	rx=rx-(2*rx);
+			//}
+			//else if (negy < 5) {
+			//	ry=ry-(2*ry);
+			//}
+			//else if (negz < 5) {
+			//	rz=rz-(2*rz);
+			//}
 
 			//bullets.push_back(new Mshot(0.1, {GetCamera()->getDir()*70 }, { GetCamera()->getEye() }, 0.7, { rx/10,ry/10,rz/10},{0,0,1,1},tamrnd));
 		
@@ -254,10 +254,10 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	case 'G':
 		//if (!psys->getgrav) {
-		if (!wmg->getgrav) {
+		/*if (!psys->getgrav) {
 			psys->getgrav = true;
 			
-		}
+		}*/
 		if (!psys->getgrav) {
 			//wmg->getgrav = true;
 		}
@@ -273,7 +273,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 			
 			wmg->getwind = true;
 			
-			wmg->createwindAreaForce();
+			//wmg->createwindAreaForce();
 		}
 		
 		break;
@@ -356,32 +356,32 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
-	if (actor2->getName() == "media") {
+	if (actor2->getName() == "media"&& !wmg->diana1destruida) {
 		psys->activate = true;
 		wmg->addPoints();
 	}
 
-	if (actor2->getName() == "media2") {
+	if (actor2->getName() == "media2" && !wmg->diana2destruida) {
 		wmg->addPoints();
 		psys->activate = true;
 	}
 
-	if (actor2->getName() == "alta3") {
+	if (actor2->getName() == "alta3" && !wmg->diana3destruida) {
 		wmg->addPoints();
 		psys->activate = true;
 	}
 
-	if (actor2->getName() == "alta4") {
+	if (actor2->getName() == "alta4" && !wmg->diana4destruida) {
 		wmg->addPoints();
 		psys->activate = true;
 	}
 
-	if (actor2->getName() == "alta5") {
+	if (actor2->getName() == "alta5" && !wmg->diana5destruida) {
 		wmg->addPoints();
 		psys->activate = true;
 	}
 	
-	//gScene->removeActor(*actor2, false);
+	
 
 
 }
