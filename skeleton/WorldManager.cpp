@@ -276,7 +276,7 @@ void WorldManager::createDiana3() {
 	physx::PxRigidStatic* diaA3 = phy->createRigidStatic(physx::PxTransform({ -50,50,-70 }));
 	diaA3->setName("alta3");
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	StaticRigidBody* cen3 = new StaticRigidBody(diaA3, { 0.3,0.2,0.5,1 }, 2, 0, { 1.5,1.5,0.4 });
+	StaticRigidBody* cen3 = new StaticRigidBody(diaA3, { 0.0,0.2,0.5,1 }, 2, 0, { 1.5,1.5,0.4 });
 	scene->addActor(*diaA3);
 	diana.push_back(cen3);
 
@@ -305,7 +305,7 @@ void WorldManager::createDiana5() {
 	getwind = true;
 	wforceGen = new WindForceGenerator({ 1000,500,1000 }, 0.5, 0, 70);
 
-	physx::PxRigidStatic* diaA5 = phy->createRigidStatic(physx::PxTransform({ -20,40,-20 }));
+	physx::PxRigidStatic* diaA5 = phy->createRigidStatic(physx::PxTransform({ -30,30,-30 }));
 	diaA5->setName("alta5");
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
 	StaticRigidBody* cen5 = new StaticRigidBody(diaA5, { 0.3,0.2,0.5,1 }, 2, 0, { 2,0.4,2 });
