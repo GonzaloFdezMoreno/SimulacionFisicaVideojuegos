@@ -15,7 +15,17 @@ WorldManager::WorldManager(int nobj, physx::PxPhysics* phys, physx::PxScene* sc)
 
 
 WorldManager::~WorldManager() {
+	for (auto pl = _objects.begin(); pl != _objects.end();) {
+		delete* pl;
+		pl = _objects.erase(pl);
 
+	}
+
+	for (auto pg = _particles_generators.begin(); pg != _particles_generators.end();) {
+		delete* pg;
+		pg = _particles_generators.erase(pg);
+
+	}
 }
 
 void WorldManager::update(double t) {
