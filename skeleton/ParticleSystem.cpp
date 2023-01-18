@@ -5,7 +5,16 @@ ParticleSystem::ParticleSystem(int npart) {
 	uPG = new UniformParticleGenerator({ 0,10,7 }, {1,2,1});
 	_particles_generators.push_back(uPG);
 
-	fireworkSysGen = new FireworkGenerator({ 0,20,0 }, { 0,100,0 });
+	fireworkSysGen = new FireworkGenerator({ 0,20,0 }, { 0,80,0 },100);
+	fireworkSysGen2 = new FireworkGenerator({ -40,20,0 }, { 0,80,0 },100);
+	fireworkSysGen3 = new FireworkGenerator({ -20,20,0 }, { 0,80,0 },100);
+	fireworkSysGen4 = new FireworkGenerator({ 20,20,0 }, { 0,80,0 },100);
+	fireworkSysGen5 = new FireworkGenerator({ 40,20,0 }, { 0,80,0 },100);
+	_particles_generators.push_back(fireworkSysGen);
+	_particles_generators.push_back(fireworkSysGen2);
+	_particles_generators.push_back(fireworkSysGen3);
+	_particles_generators.push_back(fireworkSysGen4);
+	_particles_generators.push_back(fireworkSysGen5);
 	//_particles_generators.push_back(fireworkSysGen);
 
 	/*Particle* pa = new Particle({ 0,30,0 }, { 0,-3,0 }, 1, { 3,10,7 }, { 0,0.6,1,1 }, 3);
@@ -24,6 +33,17 @@ ParticleSystem::ParticleSystem(int npart) {
 
 }
 ParticleSystem::~ParticleSystem() {
+	for (auto pl = _particles.begin(); pl != _particles.end();) {
+		delete* pl;
+		pl=_particles.erase(pl);
+
+	}
+	
+	for (auto pg = _particles_generators.begin(); pg != _particles_generators.end();) {
+		delete* pg;
+		pg= _particles_generators.erase(pg);
+
+	}
 
 
 }
@@ -48,14 +68,30 @@ void ParticleSystem::update(double t) {
 		if (activate) {
 			generateFireworkSystem();
 		}
+		
+		if (activate2) {
+			generateFireworkSystem();
+			generateMultipleFireworkSystem();
+		}
 
 		if (create) {
 			//generateSpring();
 			for (int i = 0; i < 10; i++) {
 				
-				generateMultiSpring(i * 20);
+				generateMultiSpring(i * 20,100);
 			}
+			created = true;
 		}
+
+		if (create2) {
+			//generateSpring();
+			for (int i = 0; i < 10; i++) {
+
+				generateMultiSpring(i * 20,-100);
+			}
+			created2 = true;
+		}
+
 		if (flotar) {
 			flota();
 		}
@@ -150,8 +186,46 @@ void ParticleSystem::generateFireworkSystem() {
 		_particles.push_back(pl);
 
 	}
+	
 	activate = false;
    
+}
+
+void ParticleSystem::generateMultipleFireworkSystem() {
+	//std::list<Firework*> fir = fireworkSysGen->generateParticles();
+	std::list<Particle*> fir2 = fireworkSysGen2->generateParticles();
+	std::list<Particle*> fir3 = fireworkSysGen3->generateParticles();
+	std::list<Particle*> fir4 = fireworkSysGen4->generateParticles();
+	std::list<Particle*> fir5 = fireworkSysGen5->generateParticles();
+	
+
+	for (auto pl : fir2) {
+
+		//_fireworks.push_back(pl);
+		_particles.push_back(pl);
+
+	}
+	for (auto pl : fir3) {
+
+		//_fireworks.push_back(pl);
+		_particles.push_back(pl);
+
+	}
+	for (auto pl : fir4) {
+
+		//_fireworks.push_back(pl);
+		_particles.push_back(pl);
+
+	}
+	for (auto pl : fir5) {
+
+		//_fireworks.push_back(pl);
+		_particles.push_back(pl);
+
+	}
+	
+	activate2 = false;
+
 }
 
 void ParticleSystem::createExplosionForce() {
@@ -202,18 +276,26 @@ void ParticleSystem::flota() {
 
 
 
-void ParticleSystem::generateMultiSpring(float desp) {
+void ParticleSystem::generateMultiSpring(float desp,float lado) {
 	
-	Particle* panch = new Particle({ 100,95,desp-100}, { 0,0,0 }, 0.9, { 0,-2,0 }, { 0,1,1,1 }, 1, 2, false, 0);
-	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { 100,100,desp-100 });
+	Particle* panch = new Particle({ lado,95,desp-100}, { 0,0,0 }, 0.9, { 0,-2,0 }, { 0,1,1,1 }, 1, 2, false, 0);
+	//cambiar lado por 100 para que lo de abajo ocurra (lo del create 2)
+	//esto es debido a que elmuelle al que estan sujetos está al otro lado
+	AnchorForceGen* anfor = new AnchorForceGen(1, 10, { lado,100,desp-100 });
 	regfor->addRegistry(anfor, panch);
 	_particles.push_back(panch);
 	create = false;
+
+
+	//probar a comentarlo (las particulas hacen un recorrido curioso, pero como no paran de generarse acaba esplotando el programa)
+	create2 = false;
+
+
 	vector<Particle*> pcuerda(4);
 
 	for (int j = 0; j < pcuerda.size(); j++) {
 		float newy = (90 - (j*5));
-		pcuerda[j] = new Particle({ 100,newy,desp-100}, {0,0,0}, 0.9, {0,0,0}, {0,1,1,1}, 1, 2, false, 0);
+		pcuerda[j] = new Particle({ lado,newy,desp-100}, {0,0,0}, 0.9, {0,0,0}, {0,1,1,1}, 1, 2, false, 0);
 		_particles.push_back(pcuerda[j]);
 	}
 
@@ -239,4 +321,7 @@ void ParticleSystem::generateMultiSpring(float desp) {
 			
 		//}
 	}
+
+	
+	
 }

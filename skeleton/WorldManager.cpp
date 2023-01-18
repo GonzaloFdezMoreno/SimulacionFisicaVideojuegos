@@ -108,6 +108,16 @@ void WorldManager::update(double t) {
 		createDiana5();
 		diana5creada = true;
 	}
+	else if (points >= 10) {
+		for (auto di = diana.begin(); di != diana.end();) {
+
+			delete* di;
+			di = diana.erase(di);
+		}
+
+		wforceGen->eraseArea();
+		diana5destruida = true;
+	}
 
 	//if (_objects.size() < nob) {
 	//	//if (create) {
@@ -276,9 +286,9 @@ void WorldManager::createDiana3() {
 
 void WorldManager::createDiana4() {
 	getexplosion = true;
-	expForceGen = new ExplosionForceGenerator({ -10,60,-30 }, 10, 2);
-	expForceGen2 = new ExplosionForceGenerator({ -20,80,-35 }, 10, 2);
-	expForceGen3 = new ExplosionForceGenerator({ -30,63,-20 }, 10, 2);
+	expForceGen = new ExplosionForceGenerator({ -10,62,-30 }, 10, 0.5);
+	expForceGen2 = new ExplosionForceGenerator({ -20,80,-35 }, 10, 0.5);
+	expForceGen3 = new ExplosionForceGenerator({ -30,63,-20 }, 10, 0.5);
 
 	physx::PxRigidStatic* diaA4 = phy->createRigidStatic(physx::PxTransform({ -20,70,-40 }));
 	diaA4->setName("alta4");

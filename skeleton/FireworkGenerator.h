@@ -15,7 +15,7 @@ protected:
 	std::normal_distribution<double> vel{ 15, 2 };
 
 public:
-	FireworkGenerator(Vector3 std_dev_pos, Vector3 std_dev_vel);
+	FireworkGenerator(Vector3 std_dev_pos, Vector3 std_dev_vel,double std_dev_t);
 	~FireworkGenerator();
 	//std::list<Firework*> generateParticles(); 
 	std::list<Particle*> generateParticles() override; 

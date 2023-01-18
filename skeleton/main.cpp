@@ -51,6 +51,7 @@ RenderItem* item = NULL;
 WorldManager* wmg = NULL;
 
 bool choca = true;
+bool fin = false;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -117,6 +118,11 @@ void stepPhysics(bool interactive, double t)
 
 	wmg->update(t);
 
+	if (!fin && wmg->diana5destruida) {
+		psys->activate2 = true;
+		fin = true;
+	}
+
 	/*for (auto ob = bullets.begin(); ob != bullets.end();) {
 		if ((*ob)->obj->getGlobalPose().p.y >= 10) {
 			if ((*ob)->inTime()) {
@@ -177,19 +183,22 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'B':
 		//pistola
 		//bullets.push_back(new Mshot(0.4, { GetCamera()->getDir() * 250 }, { GetCamera()->getEye() }, 0.99, { 0,-0.5,0 }, {0.3,0.4,0.5,1},2));
-		bul= gPhysics->createRigidDynamic(physx::PxTransform({ GetCamera()->getEye() }));
-		rigBul = new RigidBody(bul, { 0.5,0.5,0.5,1 }, 0, 2);
-		//bullets.push_back(rigBul);
-		wmg->addToList(rigBul);
 
-		bul->setMass(0.4);
-		bul->setLinearDamping(0.5);
-		gScene->addActor(*bul);
-		bul->setName("bala");
-		bul->setLinearVelocity(GetCamera()->getDir() * 250);
-		
-		
-		choca = true;
+		if (!wmg->diana4destruida) {
+			bul = gPhysics->createRigidDynamic(physx::PxTransform({ GetCamera()->getEye() }));
+			rigBul = new RigidBody(bul, { 0.5,0.5,0.5,1 }, 0, 2);
+			//bullets.push_back(rigBul);
+			wmg->addToList(rigBul);
+
+			bul->setMass(0.4);
+			bul->setLinearDamping(0.5);
+			gScene->addActor(*bul);
+			bul->setName("bala");
+			bul->setLinearVelocity(GetCamera()->getDir() * 250);
+
+
+			choca = true;
+		}
 
 		break;
 	case 'L': {
@@ -336,11 +345,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 
 	case 'K':
-		if (psys != NULL) {
+		/*if (psys != NULL) {
 			if (!psys->create) {
 				psys->create = true;
 			}
-		}
+		}*/
 		break;
 
 	case 'M':
@@ -366,6 +375,14 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 			psys->activate = true;
 			wmg->addPoints();
 			choca = false;
+
+			if (!psys->created) {
+				psys->create = true;
+			}
+			if (psys->created&&!psys->created2) {
+				psys->create2 = true;
+			}
+
 		}
 
 		if (actor2->getName() == "media2" && !wmg->diana2destruida) {
@@ -391,6 +408,7 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 			psys->activate = true;
 			choca = false;
 		}
+		
 		
 	}
 

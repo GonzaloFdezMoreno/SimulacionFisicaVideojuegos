@@ -12,7 +12,7 @@
 
 class Firework:public Particle {
 public:
-	Firework(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam);
+	Firework(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam,int time);
 	~Firework();
 
 
@@ -25,6 +25,8 @@ public:
 
 protected:
 	std::mt19937 rnd;
+	float dispersion;
+	int timetolive;
 };
 
 

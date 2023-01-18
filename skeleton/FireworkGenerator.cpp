@@ -2,10 +2,11 @@
 
 
 
-FireworkGenerator::FireworkGenerator(Vector3 pos, Vector3 vel) :ParticleGenerator(pos,vel) {
+FireworkGenerator::FireworkGenerator(Vector3 pos, Vector3 vel,double time) :ParticleGenerator(pos,vel) {
 
 	std_dev_pos = pos;
 	std_dev_vel = vel;
+	std_dev_t = time;
 
 }
 FireworkGenerator::~FireworkGenerator() {
@@ -25,7 +26,7 @@ FireworkGenerator::~FireworkGenerator() {
 
 std::list<Particle*> FireworkGenerator::generateParticles() {
 	std::list<Particle*> lPart;
-	Firework* part = new Firework({ std_dev_pos }, { std_dev_vel }, 0.7, { 0,0,0 }, { 0,0.6,1,1 }, 3);
+	Firework* part = new Firework({ std_dev_pos }, { std_dev_vel }, 0.7, { 0,0,0 }, { 1,1,1,1 }, 3, std_dev_t);
 	lPart.push_back(part);
 
 

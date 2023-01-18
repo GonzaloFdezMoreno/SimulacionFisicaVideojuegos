@@ -3,9 +3,11 @@
 
 
 
-Firework::Firework(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam):Particle(pos,vel,damping,accelerate,color,tam,0,false,500) {
+Firework::Firework(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam,int time):Particle(pos,vel,damping,accelerate,color,tam,0,false,500) {
 	
 	//isFire = true;
+	
+	timetolive = time;
 	
 }
 
@@ -15,7 +17,7 @@ Firework::~Firework() {
 
 
 void Firework::update(double t){
-	if(timeAlive>500){
+	if(timeAlive>timetolive){
 		//explode();
 		die = true;
 	}
@@ -34,7 +36,9 @@ void Firework::update(double t){
 std::list<Particle*> Firework::explode() {
 	std::list<Particle*> fir;
 	//UniformParticleGenerator* genF = new UniformParticleGenerator(posit.p,{3,3,3});
-	
+	auto rdis = std::normal_distribution<float>{ 2, 1 };
+	float negty = rand() % 10 + 1;
+	dispersion = rdis(rnd);
 	for (int i = 0; i < 100; i++) {
 		//std::list<Particle*>ep=(genF->generateParticles());
 		//for (auto prt : ep) {
@@ -44,17 +48,30 @@ std::list<Particle*> Firework::explode() {
 		//float vz = rand() % 50;
 
 		auto vx = std::normal_distribution<float>{ 10, 20 }; //10,1
-		auto vy = std::normal_distribution<float>{0, 1};
+		auto vy = std::normal_distribution<float>{ 0, 1 };
 		auto vz = std::normal_distribution<float>{ 15, 11 };
+
+		
 
 		float negx = rand() % 10 + 1;
 		float negy = rand() % 10 + 1;
 		float negz = rand() % 10 + 1;
 
-		//int tamrnd = rand() % 4 + 1;
 
 		
-		Vector3 velc = { vx(rnd),vy(rnd),vz(rnd)};
+
+
+		//int tamrnd = rand() % 4 + 1;
+
+
+		//colores random
+		auto rr = std::normal_distribution<float>{ 1, 1 };
+		auto rg = std::normal_distribution<float>{ 1, 1 };
+		auto rb = std::normal_distribution<float>{ 1, 1 };
+
+
+		Vector3 velc = { vx(rnd),vy(rnd),vz(rnd) };
+		Vector3 col = { rr(rnd),rg(rnd),rb(rnd) };
 
 		if (negx < 5) {
 			velc.x = -velc.x;
@@ -65,12 +82,22 @@ std::list<Particle*> Firework::explode() {
 		else if (negz < 5) {
 			velc.z = -velc.z;
 		}
-	
-		//srand(time(NULL));
-		Particle* prt = new Particle(posit.p, velc*2, 0.5, { 0,-1,0 }, { 0,1,1,1 }, 1,0,false,300);
-			fir.push_back(prt);
 
-		//}
+		//srand(time(NULL));
+		if (negty < 5) {
+			Particle* prt = new Particle(posit.p, velc * 2, 0.5, { 0,-1,0 }, { col,1 }, 1, 0, false, 300);
+
+			fir.push_back(prt);
+		}
+		else{
+			int k = i;
+			if (i == 0) {
+				k = 1;
+			}
+			Vector3 zone = Vector3(cos(rand() % 360) * 10, 10 * sin(k * 360 / k)*5, sin(rand() % 360) * 10);
+			Particle* prt = new Particle(posit.p, zone * 2, 0.5, { 0,-1,0 }, {col,1 }, 1, 0, false, 300);
+			fir.push_back(prt);
+		}
 		
 	}
 

@@ -39,12 +39,13 @@ public:
 	void update(double t);
 	ParticleGenerator* getParticleGenerator(string nombre);
 	void generateFireworkSystem();
+	void generateMultipleFireworkSystem();
 
 	void createExplosionForce();
 	void createwindAreaForce();
 
 	void generateSpring();
-	void generateMultiSpring(float d);
+	void generateMultiSpring(float d,float l);
 	void flota();
 
 	void eraseForces();
@@ -53,6 +54,10 @@ public:
 	ParticleGenerator* gPG = nullptr;
 	//FireworkGenerator* fireworkSysGen = nullptr;
 	ParticleGenerator* fireworkSysGen = nullptr;
+	ParticleGenerator* fireworkSysGen2 = nullptr;
+	ParticleGenerator* fireworkSysGen3 = nullptr;
+	ParticleGenerator* fireworkSysGen4 = nullptr;
+	ParticleGenerator* fireworkSysGen5 = nullptr;
 
 	GravityForceGenerator* gforceGen = nullptr;
 	WindForceGenerator* wforceGen = nullptr;
@@ -60,12 +65,17 @@ public:
 	WhirlpoolForceGenerator* whForceGen = nullptr;
 
 	bool activate = false;
+	bool activate2 = false;
+
 	bool getgrav = false;
 	bool getwind = false;
 	bool getexplosion = false;
 	bool getWhirl = false;
 
 	bool create = false;
+	bool create2 = false;
+	bool created = false;
+	bool created2 = false;
 	bool flotar = false;
 
 };
