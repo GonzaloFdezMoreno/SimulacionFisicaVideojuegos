@@ -293,7 +293,7 @@ void WorldManager::createDiana4() {
 	physx::PxRigidStatic* diaA4 = phy->createRigidStatic(physx::PxTransform({ -20,70,-40 }));
 	diaA4->setName("alta4");
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
-	StaticRigidBody* cen4 = new StaticRigidBody(diaA4, { 0.3,0.2,0.5,1 }, 2, 0, { 2.5,2.5,0.4 });
+	StaticRigidBody* cen4 = new StaticRigidBody(diaA4, { 0.3,0.2,0.5,1 }, 2, 0, { 2,2,0.4 });
 	scene->addActor(*diaA4);
 	diana.push_back(cen4);
 

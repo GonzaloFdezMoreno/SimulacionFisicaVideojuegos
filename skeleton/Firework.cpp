@@ -84,12 +84,12 @@ std::list<Particle*> Firework::explode() {
 		}
 
 		//srand(time(NULL));
-		if (negty < 5) {
+		if (negty < 3) {
 			Particle* prt = new Particle(posit.p, velc * 2, 0.5, { 0,-1,0 }, { col,1 }, 1, 0, false, 300);
 
 			fir.push_back(prt);
 		}
-		else{
+		else if(negty >= 3&& negty < 6) {
 			int k = i;
 			if (i == 0) {
 				k = 1;
@@ -97,6 +97,10 @@ std::list<Particle*> Firework::explode() {
 			Vector3 zone = Vector3(cos(rand() % 360) * 10, 10 * sin(k * 360 / k)*5, sin(rand() % 360) * 10);
 			Particle* prt = new Particle(posit.p, zone * 2, 0.5, { 0,-1,0 }, {col,1 }, 1, 0, false, 300);
 			fir.push_back(prt);
+		}
+		else {
+			PAgua* part = new PAgua( posit.p , velc, 0.8, { 0,-10,0 }, { col,1 }, 1);
+			fir.push_back(part);
 		}
 		
 	}

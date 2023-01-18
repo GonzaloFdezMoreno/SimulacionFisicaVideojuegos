@@ -3,6 +3,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "Particle.h"
+#include "PAgua.h"
 //#include "GaussianParticleGenerator.h"
 //#include "UniformParticleGenerator.h"
 
