@@ -213,12 +213,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		}
 
 		break;
-	case 'L': {
-		//laser
-		//bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 1000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 },{1,0,0,1},2));
-		
-		break; 
-	}
+	//case 'L': {
+	//	//laser
+	//	//bullets.push_back(new Mshot(0.1, { GetCamera()->getDir() * 1000 }, { GetCamera()->getEye() }, 0.99, { 0,0,0 },{1,0,0,1},2));
+	//	
+	//	break; 
+	//}
 	case 'C':
 	{
 		bul = gPhysics->createRigidDynamic(physx::PxTransform({ GetCamera()->getEye() }));
@@ -246,87 +246,87 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		psys->activate = true;
 		break;
 	}
-	case 'P':
-	{
-		//pompas
-		
-			//srand(time(NULL));
-			////aceleraciones aleatorias 
-			//float rx = rand() % 2+0;
-			//float ry = rand() % 2+1;
-			//float rz = rand() % 2+0;
+	//case 'P':
+	//{
+	//	//pompas
+	//	
+	//		//srand(time(NULL));
+	//		////aceleraciones aleatorias 
+	//		//float rx = rand() % 2+0;
+	//		//float ry = rand() % 2+1;
+	//		//float rz = rand() % 2+0;
 
-			////para poner aceleraciones positivas y negativas  
-			//float negx = rand() % 10+1;
-			//float negy = rand() % 10+1;
-			//float negz = rand() % 10+1;
+	//		////para poner aceleraciones positivas y negativas  
+	//		//float negx = rand() % 10+1;
+	//		//float negy = rand() % 10+1;
+	//		//float negz = rand() % 10+1;
 
-			//int tamrnd = rand() % 4 + 1;
+	//		//int tamrnd = rand() % 4 + 1;
 
-			//if (negx < 5) {
-			//	rx=rx-(2*rx);
-			//}
-			//else if (negy < 5) {
-			//	ry=ry-(2*ry);
-			//}
-			//else if (negz < 5) {
-			//	rz=rz-(2*rz);
-			//}
+	//		//if (negx < 5) {
+	//		//	rx=rx-(2*rx);
+	//		//}
+	//		//else if (negy < 5) {
+	//		//	ry=ry-(2*ry);
+	//		//}
+	//		//else if (negz < 5) {
+	//		//	rz=rz-(2*rz);
+	//		//}
 
-			//bullets.push_back(new Mshot(0.1, {GetCamera()->getDir()*70 }, { GetCamera()->getEye() }, 0.7, { rx/10,ry/10,rz/10},{0,0,1,1},tamrnd));
-		
-		break;
-	}
+	//		//bullets.push_back(new Mshot(0.1, {GetCamera()->getDir()*70 }, { GetCamera()->getEye() }, 0.7, { rx/10,ry/10,rz/10},{0,0,1,1},tamrnd));
+	//	
+	//	break;
+	//}
 
-	case 'G':
-		//if (!psys->getgrav) {
-		/*if (!psys->getgrav) {
-			psys->getgrav = true;
-			
-		}*/
-		if (!psys->getgrav) {
-			//wmg->getgrav = true;
-		}
-		
-		break;
-	case 'T':
-		/*if (!psys->getwind) { 
-			psys->getwind = true;
-			psys->createwindAreaForce();
-		}*/
+	//case 'G':
+	//	//if (!psys->getgrav) {
+	//	/*if (!psys->getgrav) {
+	//		psys->getgrav = true;
+	//		
+	//	}*/
+	//	//if (!psys->getgrav) {
+	//	//	//wmg->getgrav = true;
+	//	//}
+	//	
+	//	break;
+	//case 'T':
+	//	/*if (!psys->getwind) { 
+	//		psys->getwind = true;
+	//		psys->createwindAreaForce();
+	//	}*/
 
-		if (!wmg->getwind) {
-			
-			wmg->getwind = true;
-			
-			//wmg->createwindAreaForce();
-		}
-		
-		break;
-	
-	case 'U':
-		//if (!psys->getexplosion) {
-		if (!wmg->getexplosion) {
-			//psys->getexplosion = true;
-			wmg->getexplosion = true;
-			//psys->createExplosionForce();
-			wmg->createExplosionForce();
-		}
-		
-		break;
-	
-	case 'H':
-		//if (!psys->getWhirl) {
-		if (!wmg->getWhirl) {
-			//psys->getWhirl = true;
-			wmg->getWhirl = true;
-			
-		}
+	//	//if (!wmg->getwind) {
+	//	//	
+	//	//	//wmg->getwind = true;
+	//	//	
+	//	//	//wmg->createwindAreaForce();
+	//	//}
+	//	
+	//	break;
+	//
+	//case 'U':
+	//	//if (!psys->getexplosion) {
+	//	//if (!wmg->getexplosion) {
+	//	//	//psys->getexplosion = true;
+	//	//	wmg->getexplosion = true;
+	//	//	//psys->createExplosionForce();
+	//	//	wmg->createExplosionForce();
+	//	//}
+	//	
+	//	break;
+	//
+	//case 'H':
+	//	//if (!psys->getWhirl) {
+	//	//if (!wmg->getWhirl) {
+	//	//	//psys->getWhirl = true;
+	//	//	wmg->getWhirl = true;
+	//	//	
+	//	//}
 		
 		break;
 	case 'X':
 		//desactivar
-		if (psys->getgrav) {
+		/*if (psys->getgrav) {
 			psys->getgrav = false;
 	
 		}
@@ -336,7 +336,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		}
 		if (psys->getwind) {
 		    psys->getwind = false;
-        }
+        }*/
 
 		if (wmg->getwind) {
 			
@@ -348,28 +348,31 @@ void keyPress(unsigned char key, const PxTransform& camera)
 			wmg->getexplosion = false;
 		}
 		//if (psys->getWhirl) {
-		if (wmg->getWhirl) {
-			//psys->getWhirl = false;
-			wmg->getWhirl = false;
-		}
+		//if (wmg->getWhirl) {
+		//	//psys->getWhirl = false;
+		//	wmg->getWhirl = false;
+		//}
 		//psys->eraseForces();
 
 		break;
 
-	case 'K':
-		/*if (psys != NULL) {
-			if (!psys->create) {
-				psys->create = true;
-			}
-		}*/
-		break;
+	//case 'K':
+	//	/*if (psys != NULL) {
+	//		if (!psys->create) {
+	//			psys->create = true;
+	//		}
+	//	}*/
+	//	break;
 
-	case 'M':
+	/*case 'M':
 		if (psys != NULL) {
 			if (!psys->flotar) {
 				psys->flotar = true;
 			}
-		}
+		}*/
+
+	case 'P':
+		psys->fin = !psys->fin;
 
 	default:
 		break;

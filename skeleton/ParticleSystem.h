@@ -32,7 +32,7 @@ protected:
 	Vector3 gravity;
 	int nump;
 
-	bool fin = false;
+	
 
 	ParticleForceRegistry* regfor;
 public:
@@ -79,5 +79,5 @@ public:
 	bool created = false;
 	bool created2 = false;
 	bool flotar = false;
-
+	bool fin = false;
 };

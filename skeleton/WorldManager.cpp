@@ -303,9 +303,9 @@ void WorldManager::createDiana4() {
 
 void WorldManager::createDiana5() {
 	getwind = true;
-	wforceGen = new WindForceGenerator({ 1000,500,1000 }, 0.5, 0, 70);
+	wforceGen = new WindForceGenerator({ 100,50,0 }, 0.8, 0.03, 70);
 
-	physx::PxRigidStatic* diaA5 = phy->createRigidStatic(physx::PxTransform({ -30,30,-30 }));
+	physx::PxRigidStatic* diaA5 = phy->createRigidStatic(physx::PxTransform({ 0,30,-30 }));
 	diaA5->setName("alta5");
 	//PxRigidDynamic* wall = gPhysics->createRigidDynamic(PxTransform({ 10,30,-30}));
 	StaticRigidBody* cen5 = new StaticRigidBody(diaA5, { 0.3,0.2,0.5,1 }, 2, 0, { 2,0.4,2 });

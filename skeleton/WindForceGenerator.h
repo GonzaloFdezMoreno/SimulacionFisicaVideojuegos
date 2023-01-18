@@ -32,7 +32,7 @@ public:
 			particle->addForce(force);
 			else {
 				force.y = 0;
-				particle->addForce(force / 100);
+				particle->addForce(force / 10);
 			}
 		}
 

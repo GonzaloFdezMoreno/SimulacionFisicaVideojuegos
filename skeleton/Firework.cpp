@@ -37,7 +37,7 @@ std::list<Particle*> Firework::explode() {
 	std::list<Particle*> fir;
 	//UniformParticleGenerator* genF = new UniformParticleGenerator(posit.p,{3,3,3});
 	auto rdis = std::normal_distribution<float>{ 2, 1 };
-	float negty = rand() % 10 + 1;
+	float negty = rand() % 10;
 	dispersion = rdis(rnd);
 	for (int i = 0; i < 100; i++) {
 		//std::list<Particle*>ep=(genF->generateParticles());
@@ -85,20 +85,27 @@ std::list<Particle*> Firework::explode() {
 
 		//srand(time(NULL));
 		if (negty < 3) {
+			if (negy < 5) {
+				col = {1, 0, 0};
+			}
+			else {
+				col = { 1, 0.92, 0.016 };
+			}
 			Particle* prt = new Particle(posit.p, velc * 2, 0.5, { 0,-1,0 }, { col,1 }, 1, 0, false, 300);
 
 			fir.push_back(prt);
 		}
-		else if(negty >= 3&& negty < 6) {
+		else if(negty >=3 && negty < 6) {
 			int k = i;
 			if (i == 0) {
 				k = 1;
 			}
 			Vector3 zone = Vector3(cos(rand() % 360) * 10, 3*sin(k * 360 / k)*velc.y, sin(rand() % 360) * 10);
-			Particle* prt = new Particle(posit.p, zone * 2, 0.5, { 0,-1,0 }, {col,1 }, 1, 0, false, 300);
+			Particle* prt = new Particle(posit.p, zone * 2, 0.5, { 0,-1,0 }, { 1,0,1,1 }, 1, 0, false, 300);
 			fir.push_back(prt);
 		}
 		else {
+			//globos de agua por ejemplo
 			PAgua* part = new PAgua( posit.p , velc, 0.8, { 0,-10,0 }, { col,1 }, 0.7,1);
 			fir.push_back(part);
 		}
