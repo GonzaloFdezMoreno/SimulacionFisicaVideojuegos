@@ -5,6 +5,7 @@ ParticleSystem::ParticleSystem(int npart) {
 	uPG = new UniformParticleGenerator({ 0,10,7 }, {1,2,1});
 	_particles_generators.push_back(uPG);
 
+  
 	fireworkSysGen = new FireworkGenerator({ 0,20,0 }, { 0,80,0 },100);
 	fireworkSysGen2 = new FireworkGenerator({ -40,20,0 }, { 0,80,0 },100);
 	fireworkSysGen3 = new FireworkGenerator({ -20,20,0 }, { 0,80,0 },100);
@@ -19,7 +20,7 @@ ParticleSystem::ParticleSystem(int npart) {
 
 	/*Particle* pa = new Particle({ 0,30,0 }, { 0,-3,0 }, 1, { 3,10,7 }, { 0,0.6,1,1 }, 3);
 	_particles.push_back(pa);*/
-	gPG = new GaussianParticleGenerator({ 2,2,0 }, { 1,2,1 });
+	gPG = new GaussianParticleGenerator({ 0,10,0 }, { 0,0,0 });
 	_particles_generators.push_back(gPG);
 	 
 	regfor = new ParticleForceRegistry();
@@ -56,48 +57,59 @@ void ParticleSystem::update(double t) {
 		
 	
 		
-
+	if (_particles.size() < 2000) {
 		std::list<Particle*> pa = uPG->generateParticles();
-		//std::list<Particle*> pa = gPG->generateParticles();
 
 		for (auto pl : pa) {
 			_particles.push_back(pl);
-			
+
 		}
 
-		if (activate) {
-			generateFireworkSystem();
+		if (fin) {
+
+			std::list<Particle*> pg = gPG->generateParticles();
+			for (auto pl : pg) {
+				_particles.push_back(pl);
+			}
+
 		}
+	}
+
+
+	if (activate) {
+		generateFireworkSystem();
+	}
 		
-		if (activate2) {
-			generateFireworkSystem();
-			generateMultipleFireworkSystem();
-		}
+	if (activate2) {
+		generateFireworkSystem();
+		generateMultipleFireworkSystem();
+	}
 
-		if (create) {
+	if (create) {
 			//generateSpring();
-			for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 				
-				generateMultiSpring(i * 20,100);
-			}
-			created = true;
+			generateMultiSpring(i * 20,100);
 		}
+		created = true;
+	}
 
-		if (create2) {
-			//generateSpring();
-			for (int i = 0; i < 10; i++) {
+	if (create2) {
+		//generateSpring();
+		for (int i = 0; i < 10; i++) {
 
-				generateMultiSpring(i * 20,-100);
-			}
-			created2 = true;
+			generateMultiSpring(i * 20, -100);
 		}
+		created2 = true;
+	}
 
-		if (flotar) {
-			flota();
-		}
+
+	if (flotar) {
+		flota();
+	}
 	//}
 
-		regfor->updateForces(t);
+	regfor->updateForces(t);
 
 	for (auto pt = _particles.begin(); pt!=_particles.end();) {
 		if (getgrav) {
@@ -225,6 +237,7 @@ void ParticleSystem::generateMultipleFireworkSystem() {
 	}
 	
 	activate2 = false;
+	fin = true;
 
 }
 

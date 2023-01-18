@@ -3,7 +3,7 @@
 
 
 
-PAgua::PAgua(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam):Particle(pos,vel,damping,accelerate,color,tam,0,false,500) {
+PAgua::PAgua(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, float tam,float mass):Particle(pos,vel,damping,accelerate,color,tam,mass,false,500) {
 	
 	//isFire = true;
 	
@@ -36,7 +36,7 @@ std::list<Particle*> PAgua::explode() {
 	for (int i = 0; i < 3; i++) {
 
 
-		auto vx = std::normal_distribution<float>{ 5, 3 }; //10,1
+		auto vx = std::normal_distribution<float>{ 5, 3 };
 		auto vy = std::normal_distribution<float>{ 10, 1 };
 		auto vz = std::normal_distribution<float>{ 5, 2 };
 
@@ -57,9 +57,9 @@ std::list<Particle*> PAgua::explode() {
 			velc.z = -velc.z;
 		}
 
-		if (velc.y < 0) {
+		/*if (velc.y < 0) {
 			velc.y *= 2;
-		}
+		}*/
 		//velc.y = rand() % 3 + 10;
 		
 

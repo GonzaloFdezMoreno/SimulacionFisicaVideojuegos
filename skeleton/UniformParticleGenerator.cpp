@@ -17,12 +17,14 @@ std::list<Particle*> UniformParticleGenerator::generateParticles() {
 	float rx = rand() % 100;
 	//float ry = rand() % 50;
 	float rz = rand() % 50;
+
+	float rm = rand() % 10;
 	int ini = rx;
 	if (ini % 2 == 0) {
 		rx -= (rx * 2);
 	}
 
-	PAgua* part = new PAgua({rx,100,-145}, _vel_width, 1, { 0,-7,0 }, { 0,0.6,1,1 }, 1);
+	PAgua* part = new PAgua({rx,100,-145}, _vel_width, 1, { 0,-7,0 }, { 0,0.6,1,1 }, 1,rm);
 	lPart.push_back(part);
 	
 	return lPart;

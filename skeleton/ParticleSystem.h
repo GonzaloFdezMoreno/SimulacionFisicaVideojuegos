@@ -32,6 +32,8 @@ protected:
 	Vector3 gravity;
 	int nump;
 
+	bool fin = false;
+
 	ParticleForceRegistry* regfor;
 public:
 	ParticleSystem(int npart);

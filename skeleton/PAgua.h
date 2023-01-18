@@ -12,7 +12,7 @@
 
 class PAgua:public Particle {
 public:
-	PAgua(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, int tam);
+	PAgua(Vector3 pos, Vector3 vel, float damping, Vector3 accelerate, Vector4 color, float tam,float mass);
 	~PAgua();
 
 

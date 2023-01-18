@@ -94,12 +94,12 @@ std::list<Particle*> Firework::explode() {
 			if (i == 0) {
 				k = 1;
 			}
-			Vector3 zone = Vector3(cos(rand() % 360) * 10, 10 * sin(k * 360 / k)*5, sin(rand() % 360) * 10);
+			Vector3 zone = Vector3(cos(rand() % 360) * 10, 3*sin(k * 360 / k)*velc.y, sin(rand() % 360) * 10);
 			Particle* prt = new Particle(posit.p, zone * 2, 0.5, { 0,-1,0 }, {col,1 }, 1, 0, false, 300);
 			fir.push_back(prt);
 		}
 		else {
-			PAgua* part = new PAgua( posit.p , velc, 0.8, { 0,-10,0 }, { col,1 }, 1);
+			PAgua* part = new PAgua( posit.p , velc, 0.8, { 0,-10,0 }, { col,1 }, 0.7,1);
 			fir.push_back(part);
 		}
 		

@@ -89,8 +89,20 @@ void initPhysics(bool interactive)
 	item = new RenderItem(shape, suelo, { 0.5,0.8,1,1 });
 	gScene->addActor(*suelo);
 
+	PxRigidStatic* fuente = gPhysics->createRigidStatic(PxTransform({ 0,100, -145 }));
+	PxShape* shapeF = CreateShape(PxBoxGeometry(100, 1, 2));
+	fuente->attachShape(*shapeF);
+	item = new RenderItem(shapeF, fuente, { 0.5,0.8,1,1 });
+	gScene->addActor(*fuente);
+
+	
+
 
 	wmg = new WorldManager(10, gPhysics, gScene);
+
+
+
+
 
 	wmg->createDiana();
 
@@ -215,7 +227,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//bullets.push_back(rigBul);
 		wmg->addToList(rigBul);
 		bul->setLinearDamping(0.5);
-		bul->setMass(3);
+		bul->setMass(5);
 		gScene->addActor(*bul);
 		bul->setName("bala");
 		bul->setLinearVelocity(GetCamera()->getDir() * 100);
