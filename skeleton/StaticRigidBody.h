@@ -57,7 +57,7 @@ public:
 protected:
 
 
-	RenderItem* renderItemPart;
+	//RenderItem* renderItemPart;
 
 	float timeAlive;
 
